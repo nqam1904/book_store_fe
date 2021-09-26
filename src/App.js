@@ -1,17 +1,19 @@
-import { Switch, Route } from "react-router";
+import { Switch, Route } from "react-router-dom";
+import PrivateRoute from "./guard/PrivateRoute";
+import { Auth, Client } from "pages";
 import "./App.css";
-import { Header } from "./components";
-import { User, Book } from "./pages";
-function App() {
+import { NotFound } from "components";
+const App = () => {
   return (
-    <div className="App">
-      <Header />
-      <Switch>
-        <Route path="/admin/user" component={User} />
-        <Route path="/admin/book" component={Book} />
-      </Switch>
-    </div>
+    <Switch>
+      <Route path="/login" exact component={Auth} />
+      <Route path="/" exact component={Client} />
+      <PrivateRoute path="/admin" />
+      <Route path="*">
+        <NotFound />
+      </Route>
+    </Switch>
   );
-}
+};
 
 export default App;
