@@ -1,10 +1,10 @@
-import { User, Book, Home, Auth, Client } from "pages";
+import { User, Book, Admin, Auth, Client } from "pages";
 import { lazy } from "react";
 
 const routes = [
   {
     path: "/",
-    component: lazy(() => Client),
+    component: Client,
     exact: true,
   },
   {
@@ -13,7 +13,7 @@ const routes = [
   },
   {
     path: "/admin",
-    component: lazy(() => Home),
+    component: lazy(() => Admin),
   },
 
   {

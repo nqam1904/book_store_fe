@@ -1,11 +1,25 @@
 import { applyMiddleware, createStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
-import { rootSaga } from "./saga";
-import { rootReducer } from "./reducers";
+import { rootSaga } from "redux/saga";
+import rootReducer from "redux/reducers";
+import { routerMiddleware } from "connected-react-router";
+import { createBrowserHistory } from "history";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 const sagaMiddleware = createSagaMiddleware();
+export const history = createBrowserHistory({
+  forceRefresh: true,
+});
+export default function configureStore(preloadedState) {
+  const middlewares = [sagaMiddleware, routerMiddleware(history)];
 
-const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
-sagaMiddleware.run(rootSaga);
+  const composedEnhancer = composeWithDevTools(applyMiddleware(...middlewares));
 
-export default store;
+  const store = createStore(
+    rootReducer(history),
+    preloadedState,
+    composedEnhancer
+  );
+  sagaMiddleware.run(rootSaga);
+  return store;
+}

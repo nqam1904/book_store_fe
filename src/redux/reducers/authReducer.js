@@ -1,4 +1,4 @@
-import * as Action from "../actions/loginAction";
+import * as Action from "redux/actions/loginAction";
 const initialState = {
   user: {
     firstName: "",
