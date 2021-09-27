@@ -12,14 +12,12 @@ function* loginSaga(action) {
   try {
     Loading.show();
     const response = yield call(loginApi.login, action.payload);
-
     localStorage.setItem(StorageKeys.TOKEN, response.access_token);
-    localStorage.setItem(StorageKeys.USER, response.data);
+    localStorage.setItem(StorageKeys.USER, JSON.stringify(response.data));
 
     yield put(
       Action.loginSuccess({
         ...response.data,
-        access_token: response.access_token,
       })
     );
     toast.success("🚀 Success", option);

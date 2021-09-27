@@ -4,9 +4,6 @@ import { Route, Switch } from "react-router-dom";
 import routes from "routes";
 
 const Home = () => {
-  useEffect(() => {
-    console.log("hello");
-  }, []);
   const renderRouter = () => {
     var result = null;
 

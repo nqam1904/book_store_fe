@@ -6,7 +6,7 @@ import { userSelector } from "redux/selectores/authSelector";
 import "./index.scss";
 const Header = () => {
   const user = useSelector(userSelector);
-  console.log(user);
+  console.log(user.user);
   return (
     <Navbar
       collapseOnSelect
@@ -32,7 +32,7 @@ const Header = () => {
         </Navbar.Collapse>
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            Signed in as: <span>Hello</span>
+            Signed in as: <span>{`${user.user?.firstName}`}</span>
           </Navbar.Text>
         </Navbar.Collapse>
       </Container>

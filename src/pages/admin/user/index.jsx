@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import "./index.scss";
 import { Button, Table } from "react-bootstrap";
-import { Diaglog, InputField } from "../../../components";
+import { Diaglog, InputField } from "components";
 
 const User = () => {
   const [fullName, setFullName] = useState("");

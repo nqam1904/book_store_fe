@@ -1,4 +1,5 @@
 import axios from "axios";
+import StorageKeys from "constants/Storage-key";
 import { API_URL } from "../config";
 
 const axiosClient = axios.create({
@@ -11,11 +12,10 @@ const axiosClient = axios.create({
 // Add a request interceptor
 axiosClient.interceptors.request.use(
   function (config) {
-    // Do something before request is sent
+    config.headers["access_token"] = localStorage.getItem(StorageKeys.TOKEN);
     return config;
   },
   function (error) {
-    // Do something with request error
     return Promise.reject(error);
   }
 );
@@ -23,8 +23,6 @@ axiosClient.interceptors.request.use(
 // Add a response interceptor
 axiosClient.interceptors.response.use(
   function (response) {
-    // Any status code that lie within the range of 2xx cause this function to trigger
-    // Do something with response data
     return response.data;
   },
   function (error) {
