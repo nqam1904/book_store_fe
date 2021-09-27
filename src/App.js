@@ -6,6 +6,7 @@ import { NotFound } from "components";
 import { ConnectedRouter } from "connected-react-router";
 import PropTypes from "prop-types";
 import StorageKeys from "constants/Storage-key";
+
 const App = ({ history }) => {
   const isAuthenticated = localStorage.getItem(StorageKeys.TOKEN);
   return (

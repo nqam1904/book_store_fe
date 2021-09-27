@@ -1,28 +1,32 @@
 import { User, Book, Admin, Auth, Client } from "pages";
-import { lazy } from "react";
 
 const routes = [
   {
     path: "/",
-    component: Client,
+    component: () => <Client />,
     exact: true,
   },
   {
     path: "/login",
-    component: lazy(() => Auth),
+    component: () => <Auth />,
+
+    exact: false,
   },
   {
     path: "/admin",
-    component: lazy(() => Admin),
+    component: () => <Admin />,
+    exact: true,
   },
 
   {
     path: "/admin/account",
-    component: lazy(() => User),
+    component: () => <User />,
+    exact: false,
   },
   {
     path: "/admin/book",
-    component: lazy(() => Book),
+    component: () => <Book />,
+    exact: false,
   },
 ];
 export default routes;
