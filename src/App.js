@@ -12,8 +12,8 @@ const App = ({ history }) => {
   return (
     <ConnectedRouter history={history}>
       <Switch>
-        <Route path="/login" exact component={Auth} />
         <Route path="/" exact component={Client} />
+        <Route path="/login" component={Auth} />
         <PrivateRoute
           path="/admin"
           component={Admin}

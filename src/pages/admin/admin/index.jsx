@@ -1,15 +1,18 @@
 import { Header } from "components";
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import routes from "routes";
+
 const Home = () => {
+  useEffect(() => {
+    console.log("hello");
+  }, []);
   const renderRouter = () => {
-    let result = [];
+    var result = null;
 
     if (routes.length > 0) {
-      routes.map((route, index) => {
-        console.log(route);
-        result.push(
+      result = routes.map((route, index) => {
+        return (
           <Route
             path={route.path}
             key={index}
@@ -24,7 +27,7 @@ const Home = () => {
   return (
     <React.Fragment>
       <Header />
-      {renderRouter()}
+      {renderRouter(routes)}
     </React.Fragment>
   );
 };
