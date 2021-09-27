@@ -12,8 +12,8 @@ import { BrowserRouter } from "react-router-dom";
 let store = configureStore();
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Provider store={store}>
         <App history={history} />
         <ToastContainer
           position="bottom-center"
@@ -27,8 +27,8 @@ ReactDOM.render(
           pauseOnHover
         />
         <Loading ref={(refs) => Loading.setRef(refs)} />
-      </BrowserRouter>
-    </Provider>
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );

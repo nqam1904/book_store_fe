@@ -1,4 +1,4 @@
-import { User, Book, Admin, Auth, Client } from "pages";
+import { User, Book } from "pages";
 
 const routes = [
   {

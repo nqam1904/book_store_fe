@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import { userSelector } from "redux/selectores/authSelector";
 import "./index.scss";
 const Header = () => {
-  // const user = useSelector(userSelector);
-  // console.log(user);
+  const user = useSelector(userSelector);
+  console.log(user);
   return (
     <Navbar
       collapseOnSelect
