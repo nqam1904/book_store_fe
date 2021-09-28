@@ -45,7 +45,7 @@ function* getListAccountSaga(action) {
 function* createActionSaga(action) {
 	try {
 		Loading.show()
-		console.log(action.payload)
+		// eslint-disable-next-line
 		const response = yield call(userApi.add, action.payload)
 		yield put(Action.getListAccountAction())
 		yield DialogRef.current.close()
@@ -56,7 +56,6 @@ function* createActionSaga(action) {
 		Loading.hide()
 	}
 }
-// eslint-disable-next-line
 export default function* () {
 	yield takeLatest(Action.SIGN_IN, loginSaga)
 	yield takeLatest(Action.GET_LIST_ACCOUNT, getListAccountSaga)
