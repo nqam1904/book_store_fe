@@ -7,8 +7,8 @@ import { validateEmail } from "utils/function";
 import { toast } from "react-toastify";
 
 const Auth = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("nghiemminh1904@gmail.com");
+  const [password, setPassword] = useState("Anhminh1998@@");
   const passwordRef = useRef();
   const emailRef = useRef();
   const dispatch = useDispatch();

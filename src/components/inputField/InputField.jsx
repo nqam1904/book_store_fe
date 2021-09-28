@@ -1,72 +1,67 @@
-import React, { forwardRef, useImperativeHandle, useState } from "react";
-import { Form } from "react-bootstrap";
-import PropTypes from "prop-types";
-import "./index.scss";
+import React, { forwardRef, useImperativeHandle, useState } from 'react'
+import { Form } from 'react-bootstrap'
+import PropTypes from 'prop-types'
+import './index.scss'
 const InputField = forwardRef((props, ref) => {
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState(false);
-  const { label, disable, type, placeholder, value } = props;
+	const [message, setMessage] = useState('')
+	const [error, setError] = useState(false)
+	const { label, disable, type, placeholder, value } = props
 
-  useImperativeHandle(ref, () => ({
-    showError: (message) => showError(message),
-    hideError: () => hideError(),
-  }));
+	useImperativeHandle(ref, () => ({
+		showError: (message) => showError(message),
+		hideError: () => hideError(),
+	}))
 
-  const showError = (message = "") => {
-    setError(true);
-    setMessage(message);
-  };
+	const showError = (message = '') => {
+		setError(true)
+		setMessage(message)
+	}
 
-  const hideError = () => {
-    setError(false);
-    setMessage("");
-  };
+	const hideError = () => {
+		setError(false)
+		setMessage('')
+	}
 
-  const textInput = () => (
-    <>
-      <Form.Label>{label}</Form.Label>
-      <Form.Control
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        disable={disable}
-        onChange={props.onChange}
-      />
-    </>
-  );
+	const textInput = () => (
+		<>
+			<Form.Label>{label}</Form.Label>
+			<Form.Control
+				type={type}
+				placeholder={placeholder}
+				value={value}
+				disable={disable}
+				onChange={props.onChange}
+				maxLength={props.maxLength}
+			/>
+		</>
+	)
 
-  const textInputPass = () => (
-    <>
-      <Form.Label>{label}</Form.Label>
-      <Form.Control
-        type="password"
-        placeholder={placeholder}
-        value={value}
-        disable={disable}
-        onChange={props.onChange}
-      />
-    </>
-  );
+	const textInputPass = () => (
+		<>
+			<Form.Label>{label}</Form.Label>
+			<Form.Control
+				type="password"
+				placeholder={placeholder}
+				value={value}
+				disable={disable}
+				onChange={props.onChange}
+			/>
+		</>
+	)
 
-  return (
-    <Form.Group className="mb-3">
-      {props.isPicker ? (
-        <></>
-      ) : props.isPassword ? (
-        textInputPass()
-      ) : (
-        textInput()
-      )}
-      {error ? <Form.Text className="text_error">{message}</Form.Text> : null}
-    </Form.Group>
-  );
-});
+	return (
+		<Form.Group className="mb-3">
+			{props.isPicker ? <></> : props.isPassword ? textInputPass() : textInput()}
+			{error ? <Form.Text className="text_error">{message}</Form.Text> : null}
+		</Form.Group>
+	)
+})
 
-export default InputField;
+export default InputField
 InputField.propType = {
-  label: PropTypes.string,
-  type: PropTypes.string,
-  placeholder: PropTypes.string,
-  disable: PropTypes.bool,
-  isPassword: PropTypes.bool,
-};
+	label: PropTypes.string,
+	type: PropTypes.string,
+	placeholder: PropTypes.string,
+	disable: PropTypes.bool,
+	isPassword: PropTypes.bool,
+}
