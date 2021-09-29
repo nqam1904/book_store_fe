@@ -37,6 +37,7 @@ function* getListAccountSaga(action) {
 		const response = yield call(userApi.getAll)
 		yield put(Action.getlistAccountSuccess(response))
 	} catch (error) {
+		toast.error(`${error}`, option)
 	} finally {
 		Loading.hide()
 	}

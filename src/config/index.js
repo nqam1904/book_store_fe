@@ -1,3 +1,3 @@
-const API_URL = "http://171.252.35.177:8080/api";
+const API_URL = 'https://be-book-store.herokuapp.com/api/'
 
-export { API_URL };
+export { API_URL }
