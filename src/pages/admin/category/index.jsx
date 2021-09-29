@@ -66,7 +66,7 @@ const Category = () => {
 
 			<Diaglog ref={DialogCategoryRef} title="Create Category" onSubmit={onSubmit} size="lg">
 				<form onSubmit={onSubmit}>
-					<div className="form-group col-6">
+					<div className="form-group">
 						<InputField
 							ref={nameRef}
 							name="Category name"

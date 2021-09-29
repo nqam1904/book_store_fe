@@ -109,6 +109,7 @@ const User = () => {
 						<th>Phone</th>
 						<th>Active</th>
 						<th>Create Date</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -120,6 +121,12 @@ const User = () => {
 							<td>{item.phone}</td>
 							<td>{item.isActive + ''}</td>
 							<td>{format(new Date(item?.createDate), 'dd-LL-yyyy') + ''}</td>
+							<td className="text-center">
+								<Button variant="warning" className="text-white">
+									Edit
+								</Button>
+								<Button variant="danger ml-10">Remove</Button>
+							</td>
 						</tr>
 					))}
 				</tbody>

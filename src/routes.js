@@ -4,12 +4,11 @@ const routes = [
 	{
 		path: '/admin/account',
 		component: () => <User />,
-		exact: true,
+		exact: false,
 	},
 	{
 		path: '/admin/book',
 		component: () => <Book />,
-		exact: true,
 		exact: false,
 	},
 	{

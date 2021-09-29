@@ -9,9 +9,7 @@ import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 
 const sagaMiddleware = createSagaMiddleware()
-export const history = createBrowserHistory({
-	forceRefresh: true,
-})
+export const history = createBrowserHistory()
 //config persist storage
 const persistConfig = {
 	key: 'root',
@@ -20,12 +18,12 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer(history))
 
 //
-export default function configureStore(preloadedState) {
+export default function configureStore() {
 	const middlewares = [sagaMiddleware, routerMiddleware(history)]
 
 	const composedEnhancer = composeWithDevTools(applyMiddleware(...middlewares))
 
-	const store = createStore(persistedReducer, preloadedState, composedEnhancer)
+	const store = createStore(persistedReducer, composedEnhancer)
 	let persistor = persistStore(store)
 
 	sagaMiddleware.run(rootSaga)
