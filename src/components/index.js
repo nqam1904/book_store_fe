@@ -7,6 +7,7 @@ import Loading from './loading/Loading'
 import Footer from './footer/Footer'
 import Breadcrumb from './breadCrumb/Breadcrumb'
 import CardItem from './card/CardItem'
+import DropFileInput from './dropFileInput/DropFileInput'
 export {
 	Header,
 	Diaglog,
@@ -17,4 +18,5 @@ export {
 	Footer,
 	Breadcrumb,
 	CardItem,
+	DropFileInput,
 }

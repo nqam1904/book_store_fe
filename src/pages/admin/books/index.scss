@@ -1,0 +1,35 @@
+@import '../../../assets/colors.scss';
+:root {
+	--body-bg: #f5f8ff;
+	--box-bg: #fff;
+	--input-bg: #f5f8ff;
+	--txt-color: #2f2d2f;
+	--txt-second-color: #ccc;
+}
+.sub_text {
+	color: $error !important;
+}
+.show_image {
+	display: flex;
+	padding: 20px;
+}
+.show_image img {
+	margin-right: 20px;
+}
+.box-drop-image {
+	background-color: var(--box-bg);
+	padding: 30px;
+	border-radius: 20px;
+	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+	display: flex;
+	align-items: center;
+}
+
+.header-title {
+	margin-bottom: 30px;
+	text-align: center;
+}
+.drop-image {
+	padding: 30px;
+	background-color: $white;
+}

@@ -1,60 +1,45 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './index.scss'
 import { Button, Table } from 'react-bootstrap'
-import { Diaglog, InputField } from 'components'
+import { Diaglog, InputField, DropFileInput } from 'components'
 import { useDispatch, useSelector } from 'react-redux'
-import { listBookSelector } from 'redux/selectores/bookSelector'
-import { getListBookAction } from 'redux/actions/bookAction'
+import { listBookSelector, listCategorySelector } from 'redux/selectores/bookSelector'
+import { getListBookAction, getListCategoryAction } from 'redux/actions/bookAction'
 import { format } from 'date-fns'
+import './index.scss'
+import { formatSubstring } from 'utils/function'
 
 const Book = () => {
-	const [fullName, setFullName] = useState('')
-	const [lastName, setLastName] = useState('')
-	const [phone, setPhone] = useState('')
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
-
+	const [title, setTitle] = useState('')
+	const [author, setAuthor] = useState('')
+	const [category, setCategory] = useState([])
+	const [file, setFile] = useState([])
+	const [isEdit, setIsEdit] = useState(false)
 	const DialogRef = useRef()
-	const fullNameRef = useRef()
-	const lastNameRef = useRef()
-	const phoneRef = useRef()
-	const emailRef = useRef()
-	const passwordRef = useRef()
+	const titleRef = useRef()
+	const authorRef = useRef()
+	const categoryRef = useRef()
 
 	const dispatch = useDispatch()
 	const listBook = useSelector(listBookSelector)
+	const listCategory = useSelector(listCategorySelector)
+	useEffect(() => {
+		dispatch(getListCategoryAction())
+	}, [])
 	useEffect(() => {
 		dispatch(getListBookAction())
 	}, [])
 
-	const onChangeFullName = (e) => {
+	const onChangeTitle = (e) => {
 		e.preventDefault()
-		setFullName(e.target.value)
-		fullNameRef.current.hideError()
+		setTitle(e.target.value)
+		titleRef.current.hideError()
 	}
 
-	const onChangeLastName = (e) => {
+	const onChangeAuthor = (e) => {
 		e.preventDefault()
-		setLastName(e.target.value)
-		lastNameRef.current.hideError()
-	}
-
-	const onChangeEmail = (e) => {
-		e.preventDefault()
-		setEmail(e.target.value)
-		emailRef.current.hideError()
-	}
-
-	const onChangePassword = (e) => {
-		e.preventDefault()
-		setPassword(e.target.value)
-		passwordRef.current.hideError()
-	}
-
-	const onChangePhone = (e) => {
-		e.preventDefault()
-		setPhone(e.target.value)
-		phoneRef.current.hideError()
+		setAuthor(e.target.value)
+		authorRef.current.hideError()
 	}
 
 	const openDialog = () => {
@@ -63,17 +48,22 @@ const Book = () => {
 
 	const onSubmit = (e) => {
 		e.preventDefault()
-		if (!!fullName && !!lastName && !!phone && !!email && !!password) {
+		if (!!title && !!author) {
 			console.log('done')
 		} else {
-			fullName === '' && fullNameRef.current.showError('Please enter full name!')
-			lastName === '' && lastNameRef.current.showError('Please enter last name!')
-			phone === '' && phoneRef.current.showError('Please enter phone!')
-			email === '' && emailRef.current.showError('Please enter email!')
-			password === '' && passwordRef.current.showError('Please enter password!')
+			title === '' && titleRef.current.showError('Please enter title!')
+			author === '' && authorRef.current.showError('Please enter author!')
 		}
 	}
-
+	const onChange = () => {}
+	const openDialogEdit = () => {
+		DialogRef.current.open()
+		setIsEdit(true)
+	}
+	const onRemove = (id) => {}
+	const onFileChange = (files) => {
+		console.log(files)
+	}
 	return (
 		<div className="container">
 			<div className="nav_user">
@@ -88,79 +78,93 @@ const Book = () => {
 			<Table striped bordered hover responsive className="mt-10">
 				<thead>
 					<tr>
+						<th>Image</th>
 						<th>Book Name</th>
 						<th>Author</th>
-						<th>Image</th>
 						<th>Categories</th>
 						<th>Create Date</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					{listBook.map((item, index) => (
 						<tr key={item.id + index}>
-							<td>{item?.title}</td>
+							<td>{item?.images[0].key}</td>
+							<td>{formatSubstring(item?.title)}</td>
 							<td>{item?.author}</td>
-							<td></td>
-							<td>{item?.categories?.map((item, index) => item?.name + ', ')}</td>
+							<td>{item?.categories?.map((item) => item?.name)}</td>
 							<td>{format(new Date(item?.createDate), 'dd-LL-yyyy')}</td>
+							<td className="text-center">
+								<Button
+									variant="warning"
+									className="text-white"
+									onClick={() => openDialogEdit(item)}>
+									Edit
+								</Button>
+								<Button variant="danger ml-10" onClick={() => onRemove(item.id)}>
+									Remove
+								</Button>
+							</td>
 						</tr>
 					))}
 				</tbody>
 			</Table>
 
-			<Diaglog ref={DialogRef} title="Create Book" onSubmit={onSubmit} size="lg">
-				<form onSubmit={onSubmit}>
+			<Diaglog
+				ref={DialogRef}
+				title={isEdit ? 'Update Book' : 'Create Book'}
+				onSubmit={onSubmit}
+				size="lg">
+				<form>
 					<div className="row">
 						<div className="form-group col-6">
 							<InputField
-								ref={fullNameRef}
-								name="firstName"
-								placeholder="First Name"
-								label="First Name"
+								ref={titleRef}
+								name="title"
+								placeholder="Title"
+								label="Title"
 								type="text"
-								onChange={onChangeFullName}
-								value={fullName}
-							/>
-							<InputField
-								ref={lastNameRef}
-								name="lastName"
-								placeholder="Last Name"
-								label="Last Name"
-								type="text"
-								onChange={onChangeLastName}
-								value={lastName}
+								onChange={onChangeTitle}
+								value={title}
 							/>
 						</div>
 						<div className="form-group col-6">
 							<InputField
-								ref={emailRef}
-								name="email"
-								placeholder="Email"
-								label="Email"
-								type="email"
-								onChange={onChangeEmail}
-								value={email}
-							/>
-							<InputField
-								ref={passwordRef}
-								name="password"
-								isPassword
-								placeholder="Password"
-								label="Password"
-								type="password"
-								onChange={onChangePassword}
-								value={password}
+								ref={authorRef}
+								name="author"
+								placeholder="Author"
+								label="Author"
+								type="text"
+								onChange={onChangeAuthor}
+								value={author}
 							/>
 						</div>
-						<InputField
-							ref={phoneRef}
-							name="phone"
-							placeholder="Phone"
-							label="Phone"
-							type="text"
-							onChange={onChangePhone}
-							value={phone}
-						/>
+						<div className="form-group">
+							<label>
+								Category <sup className="sub_text">*</sup>
+							</label>
+							<select
+								className="form-control"
+								size="as"
+								as="select"
+								onChange={onChange}
+								value={setCategory}
+								name="selectCategory">
+								{/* <option>---Category---</option> */}
+								{listCategory &&
+									listCategory.map((item, index) => {
+										return (
+											<option value={item.id} key={index}>
+												{item.name}
+											</option>
+										)
+									})}
+							</select>
+						</div>
+						<br />
+						<div className="drop-image">
+							<DropFileInput onFileChange={(files) => onFileChange(files)} />
+						</div>
 					</div>
 				</form>
 			</Diaglog>
