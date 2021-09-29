@@ -12,7 +12,7 @@ const userApi = {
 	 * Get one user
 	 */
 	getOne(id) {
-		const url = `/users${id}`
+		const url = `/users/${id}`
 		return axiosClient.get(url)
 	},
 	/**

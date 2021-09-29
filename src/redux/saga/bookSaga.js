@@ -46,8 +46,37 @@ function* createCategorySaga(action) {
 		Loading.hide()
 	}
 }
+//********************************* */
+function* editCategorySaga(action) {
+	try {
+		Loading.show()
+		const response = yield call(categoryAPi.update, action.payload)
+		yield put(Action.getListCategoryAction())
+		DialogCategoryRef.current.close()
+		toast.success(`Update category success`, option)
+	} catch (error) {
+		toast.error(`${error}`, option)
+	} finally {
+		Loading.hide()
+	}
+}
+//********************************* */
+function* deleteCategorySaga(action) {
+	try {
+		Loading.show()
+		const response = yield call(categoryAPi.remove, action.payload)
+		yield put(Action.getListCategoryAction())
+		toast.success(`Remove category success`, option)
+	} catch (error) {
+		toast.error(`${error}`, option)
+	} finally {
+		Loading.hide()
+	}
+}
 export default function* () {
 	yield takeLatest(Action.GET_LIST_BOOK, getListBookSaga)
 	yield takeLatest(Action.GET_LIST_CATEGORY, getListCategorySaga)
 	yield takeLatest(Action.CREATE_CATEGORY, createCategorySaga)
+	yield takeLatest(Action.EDIT_CATEGORY, editCategorySaga)
+	yield takeLatest(Action.DELETE_CATEGORY, deleteCategorySaga)
 }

@@ -35,3 +35,19 @@ export const createCategoryAction = (payload) => {
 		payload,
 	}
 }
+//******************** */
+export const EDIT_CATEGORY = 'EDIT_CATEGORY'
+export const editCategoryAction = (payload) => {
+	return {
+		type: EDIT_CATEGORY,
+		payload,
+	}
+}
+//******************** */
+export const DELETE_CATEGORY = 'DELETE_CATEGORY'
+export const deleteCategoryAction = (payload) => {
+	return {
+		type: DELETE_CATEGORY,
+		payload,
+	}
+}

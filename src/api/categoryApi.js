@@ -12,7 +12,7 @@ const categoryAPi = {
 	 * Get one category
 	 */
 	getOne(id) {
-		const url = `/categories${id}`
+		const url = `/categories/${id}`
 		return axiosClient.get(url)
 	},
 	/**
@@ -26,14 +26,14 @@ const categoryAPi = {
 	 * update category
 	 */
 	update(data) {
-		const url = `/categories${data?.id}`
+		const url = `/categories/${data?.id}`
 		return axiosClient.put(url, data)
 	},
 	/**
 	 * delete category
 	 */
 	remove(id) {
-		const url = `/categories${id}`
+		const url = `/categories/${id}`
 		return axiosClient.delete(url)
 	},
 }
