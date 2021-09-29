@@ -44,3 +44,19 @@ export const createAccountAction = (payload) => {
 		payload,
 	}
 }
+//********************************* */
+export const EDIT_ACCOUNT = 'EDIT_ACCOUNT'
+export const editAccountAction = (payload) => {
+	return {
+		type: EDIT_ACCOUNT,
+		payload,
+	}
+}
+//********************************* */
+export const DELETE_ACCOUNT = 'DELETE_ACCOUNT'
+export const deleteAccountAction = (payload) => {
+	return {
+		type: DELETE_ACCOUNT,
+		payload,
+	}
+}

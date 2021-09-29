@@ -4,7 +4,12 @@ import { Button, Table } from 'react-bootstrap'
 import { Diaglog, InputField } from 'components'
 import { listAccountSelector } from 'redux/selectores/authSelector'
 import { useDispatch, useSelector } from 'react-redux'
-import { createAccountAction, getListAccountAction } from 'redux/actions/loginAction'
+import {
+	createAccountAction,
+	getListAccountAction,
+	editAccountAction,
+	deleteAccountAction,
+} from 'redux/actions/loginAction'
 import { format } from 'date-fns'
 
 export const DialogRef = React.createRef()
@@ -16,12 +21,13 @@ const User = () => {
 		dispatch(getListAccountAction())
 		// eslint-disable-next-line
 	}, [])
-
+	const [id, setId] = useState('')
 	const [fullName, setFullName] = useState('')
 	const [lastName, setLastName] = useState('')
 	const [phone, setPhone] = useState('')
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
+	const [isEdit, setIsEdit] = useState(false)
 
 	const fullNameRef = useRef()
 	const lastNameRef = useRef()
@@ -66,8 +72,19 @@ const User = () => {
 		setPhone('')
 		setEmail('')
 		setPassword('')
+		setId('')
+		setIsEdit(false)
 	}
 
+	const openDialogEdit = (user) => {
+		DialogRef.current.open()
+		setFullName(user.firstName)
+		setLastName(user.lastName)
+		setPhone(user.phone)
+		setEmail(user.email)
+		setId(user.id)
+		setIsEdit(true)
+	}
 	const onSubmit = (e) => {
 		e.preventDefault()
 		if (!!fullName && !!lastName && !!phone && !!email && !!password) {
@@ -89,6 +106,12 @@ const User = () => {
 		}
 	}
 
+	const onEdit = (e) => {
+		dispatch(editAccountAction({ firstName: fullName, lastName, phone, email, id }))
+	}
+	const onRemove = (id) => {
+		dispatch(deleteAccountAction(id))
+	}
 	return (
 		<div className="container">
 			<div className="nav_user">
@@ -122,18 +145,29 @@ const User = () => {
 							<td>{item.isActive + ''}</td>
 							<td>{format(new Date(item?.createDate), 'dd-LL-yyyy') + ''}</td>
 							<td className="text-center">
-								<Button variant="warning" className="text-white">
+								<Button
+									variant="warning"
+									className="text-white"
+									onClick={() => openDialogEdit(item)}>
 									Edit
 								</Button>
-								<Button variant="danger ml-10">Remove</Button>
+								<Button variant="danger ml-10" onClick={() => onRemove(item.id)}>
+									Remove
+								</Button>
 							</td>
 						</tr>
 					))}
 				</tbody>
 			</Table>
 
-			<Diaglog ref={DialogRef} title="Create Account" onSubmit={onSubmit} size="lg">
-				<form onSubmit={onSubmit}>
+			<Diaglog
+				ref={DialogRef}
+				title={isEdit ? 'Edit Account' : 'Create Account'}
+				onSubmit={isEdit ? onEdit : onSubmit}
+				size="lg">
+				<form
+				// onSubmit={isEdit ? onEdit : onSubmit}
+				>
 					<div className="row">
 						<div className="form-group col-6">
 							<InputField
@@ -165,16 +199,18 @@ const User = () => {
 								onChange={onChangeEmail}
 								value={email}
 							/>
-							<InputField
-								ref={passwordRef}
-								name="password"
-								isPassword
-								placeholder="Password"
-								label="Password"
-								type="password"
-								onChange={onChangePassword}
-								value={password}
-							/>
+							{!isEdit && (
+								<InputField
+									ref={passwordRef}
+									name="password"
+									isPassword
+									placeholder="Password"
+									label="Password"
+									type="password"
+									onChange={onChangePassword}
+									value={password}
+								/>
+							)}
 						</div>
 						<InputField
 							ref={phoneRef}

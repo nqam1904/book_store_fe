@@ -55,9 +55,40 @@ function* createActionSaga(action) {
 		Loading.hide()
 	}
 }
+//********************************* */
+function* editActionSaga(action) {
+	try {
+		Loading.show()
+		// eslint-disable-next-line
+		const response = yield call(userApi.update, action.payload)
+		yield put(Action.getListAccountAction())
+		yield DialogRef.current.close()
+		toast.success(`Update account success`, option)
+	} catch (error) {
+		toast.error(`${error}`, option)
+	} finally {
+		Loading.hide()
+	}
+}
+//********************************* */
+function* deleteActionSaga(action) {
+	try {
+		Loading.show()
+		// eslint-disable-next-line
+		const response = yield call(userApi.remove, action.payload)
+		yield put(Action.getListAccountAction())
+		toast.success(`Remove account success`, option)
+	} catch (error) {
+		toast.error(`${error}`, option)
+	} finally {
+		Loading.hide()
+	}
+}
 // eslint-disable-next-line
 export default function* () {
 	yield takeLatest(Action.SIGN_IN, loginSaga)
 	yield takeLatest(Action.GET_LIST_ACCOUNT, getListAccountSaga)
 	yield takeLatest(Action.CREATE_ACCOUNT, createActionSaga)
+	yield takeLatest(Action.EDIT_ACCOUNT, editActionSaga)
+	yield takeLatest(Action.DELETE_ACCOUNT, deleteActionSaga)
 }
