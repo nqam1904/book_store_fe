@@ -1,7 +1,7 @@
 import StorageKeys from 'constants/Storage-key'
 import * as Action from 'redux/actions/loginAction'
 const initialState = {
-	user: JSON.parse(localStorage.getItem(StorageKeys.USER)) || {
+	user: {
 		firstName: '',
 		lastName: '',
 		isActive: null,
