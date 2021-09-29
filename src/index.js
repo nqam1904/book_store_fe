@@ -15,25 +15,23 @@ let { store, persistor } = configureStore()
 
 ReactDOM.render(
 	<React.StrictMode>
-		<BrowserRouter>
-			<Provider store={store}>
-				<PersistGate loading={null} persistor={persistor}>
-					<App history={history} />
-					<ToastContainer
-						position="bottom-center"
-						autoClose={5000}
-						hideProgressBar={false}
-						newestOnTop={false}
-						closeOnClick
-						rtl={false}
-						pauseOnFocusLoss
-						draggable
-						pauseOnHover
-					/>
-					<Loading ref={(refs) => Loading.setRef(refs)} />
-				</PersistGate>
-			</Provider>
-		</BrowserRouter>
+		<Provider store={store}>
+			<PersistGate loading={null} persistor={persistor}>
+				<App history={history} />
+				<ToastContainer
+					position="bottom-center"
+					autoClose={5000}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick
+					rtl={false}
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+				/>
+				<Loading ref={(refs) => Loading.setRef(refs)} />
+			</PersistGate>
+		</Provider>
 	</React.StrictMode>,
 	document.getElementById('root')
 )

@@ -55,6 +55,7 @@ function* createActionSaga(action) {
 		Loading.hide()
 	}
 }
+// eslint-disable-next-line
 export default function* () {
 	yield takeLatest(Action.SIGN_IN, loginSaga)
 	yield takeLatest(Action.GET_LIST_ACCOUNT, getListAccountSaga)
