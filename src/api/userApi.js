@@ -26,14 +26,14 @@ const userApi = {
 	 * update user
 	 */
 	update(data) {
-		const url = `/users${data?.id}`
+		const url = `/users/${data?.id}`
 		return axiosClient.put(url, data)
 	},
 	/**
 	 * delete user
 	 */
 	remove(id) {
-		const url = `/users${id}`
+		const url = `/users/${id}`
 		return axiosClient.delete(url)
 	},
 }

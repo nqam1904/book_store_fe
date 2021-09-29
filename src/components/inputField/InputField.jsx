@@ -5,7 +5,7 @@ import './index.scss'
 const InputField = forwardRef((props, ref) => {
 	const [message, setMessage] = useState('')
 	const [error, setError] = useState(false)
-	const { label, disable, type, placeholder, value } = props
+	const { label, disable, type, placeholder, value, style } = props
 
 	useImperativeHandle(ref, () => ({
 		showError: (message) => showError(message),
@@ -26,6 +26,7 @@ const InputField = forwardRef((props, ref) => {
 		<>
 			<Form.Label>{label}</Form.Label>
 			<Form.Control
+				style={style}
 				type={type}
 				placeholder={placeholder}
 				value={value}
@@ -40,6 +41,7 @@ const InputField = forwardRef((props, ref) => {
 		<>
 			<Form.Label>{label}</Form.Label>
 			<Form.Control
+				style={style}
 				type="password"
 				placeholder={placeholder}
 				value={value}
