@@ -1,0 +1,22 @@
+@import '../../assets/colors.scss';
+
+.current {
+	position: relative;
+	color: $primary !important;
+	opacity: 1 !important;
+	border-color: #1f1f1f;
+	&::before {
+		content: '';
+		display: block;
+		position: absolute;
+		height: 4px;
+		width: 60%;
+		left: 20%;
+		bottom: -4px;
+		background: $valid;
+		-webkit-transition: bottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		transition: bottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		border-top-right-radius: 3px;
+		border-top-left-radius: 3px;
+	}
+}

@@ -4,4 +4,17 @@ import Diaglog from './modal/Dialog'
 import InputField from './inputField/InputField'
 import NotFound from './notFound/NotFound'
 import Loading from './loading/Loading'
-export { Header, Diaglog, InputField, NotFound, Loading, HeaderClient }
+import Footer from './footer/Footer'
+import Breadcrumb from './breadCrumb/Breadcrumb'
+import CardItem from './card/CardItem'
+export {
+	Header,
+	Diaglog,
+	InputField,
+	NotFound,
+	Loading,
+	HeaderClient,
+	Footer,
+	Breadcrumb,
+	CardItem,
+}

@@ -14,6 +14,7 @@ const User = () => {
 	const listAccount = useSelector(listAccountSelector)
 	useEffect(() => {
 		dispatch(getListAccountAction())
+		// eslint-disable-next-line
 	}, [])
 
 	const [fullName, setFullName] = useState('')

@@ -1,0 +1,29 @@
+.search-books {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+}
+.search-books--form {
+	display: flex;
+}
+.search-books--form .form-group {
+	margin: 0 10px 0 0;
+}
+.search-books--form input {
+	min-width: 500px;
+}
+
+.search-books--form button {
+	padding-left: 25px;
+	padding-right: 25px;
+	margin-left: 20px;
+	align-self: flex-start;
+}
+.books-list {
+	display: flex;
+	flex-wrap: wrap;
+}
+.book-card {
+	margin-top: 20px;
+	margin-right: 100px;
+}
