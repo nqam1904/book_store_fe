@@ -15,8 +15,6 @@ function* loginSaga(action) {
 		Loading.show()
 		const response = yield call(loginApi.login, action.payload)
 		localStorage.setItem(StorageKeys.TOKEN, response.access_token)
-		localStorage.setItem(StorageKeys.USER, JSON.stringify(response.data))
-
 		yield put(
 			Action.loginSuccess({
 				...response.data,
@@ -37,6 +35,7 @@ function* getListAccountSaga(action) {
 		const response = yield call(userApi.getAll)
 		yield put(Action.getlistAccountSuccess(response))
 	} catch (error) {
+		toast.error(`${error}`, option)
 	} finally {
 		Loading.hide()
 	}

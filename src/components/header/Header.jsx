@@ -21,11 +21,14 @@ const Header = () => {
 						<Nav.Link as={Link} to="/admin/book">
 							Book
 						</Nav.Link>
+						<Nav.Link as={Link} to="/admin/category">
+							Category
+						</Nav.Link>
 					</Nav>
 				</Navbar.Collapse>
 				<Navbar.Collapse className="justify-content-end">
 					<Navbar.Text>
-						Signed in as: <span>{`${user?.firstName}`}</span>
+						Signed in as: <span>{`${user.firstName}`}</span>
 					</Navbar.Text>
 				</Navbar.Collapse>
 			</Container>
