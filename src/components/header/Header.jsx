@@ -6,7 +6,6 @@ import { userSelector } from 'redux/selectores/authSelector'
 import './index.scss'
 const Header = () => {
 	const user = useSelector(userSelector)
-	console.log(user.user)
 	return (
 		<Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" sticky="top">
 			<Container>
@@ -21,6 +20,9 @@ const Header = () => {
 						</Nav.Link>
 						<Nav.Link as={Link} to="/admin/book">
 							Book
+						</Nav.Link>
+						<Nav.Link as={Link} to="/admin/category">
+							Category
 						</Nav.Link>
 					</Nav>
 				</Navbar.Collapse>

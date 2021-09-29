@@ -108,7 +108,7 @@ const Book = () => {
 				</tbody>
 			</Table>
 
-			<Diaglog ref={DialogRef} title="Create Account" onSubmit={onSubmit} size="lg">
+			<Diaglog ref={DialogRef} title="Create Book" onSubmit={onSubmit} size="lg">
 				<form onSubmit={onSubmit}>
 					<div className="row">
 						<div className="form-group col-6">
