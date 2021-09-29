@@ -11,20 +11,23 @@ const DropFileInput = (props) => {
 	const wrapperRef = useRef(null)
 
 	const [fileList, setFileList] = useState([])
+	const [type, setType] = useState('')
 
+	const [file, setFile] = useState([])
 	const onDragEnter = () => wrapperRef.current.classList.add('dragover')
 
 	const onDragLeave = () => wrapperRef.current.classList.remove('dragover')
 
 	const onDrop = () => wrapperRef.current.classList.remove('dragover')
-
 	const onFileDrop = (e) => {
 		const newFile = e.target.files[0]
 		if (newFile) {
-			console.log(newFile, 'file')
 			const updatedList = [...fileList, newFile]
 			setFileList(updatedList)
 			props.onFileChange(updatedList)
+		} else if (newFile.type === 'image/png') {
+			setFile(Array.from(e.target.files).map((file) => URL.createObjectURL(file)))
+			setType(newFile.type)
 		}
 	}
 
@@ -33,8 +36,9 @@ const DropFileInput = (props) => {
 		updatedList.splice(fileList.indexOf(file), 1)
 		setFileList(updatedList)
 		props.onFileChange(updatedList)
+		setFile([])
 	}
-
+	console.log(type, file)
 	return (
 		<>
 			<div
@@ -54,10 +58,14 @@ const DropFileInput = (props) => {
 					<p className="drop-file-preview__title">Ready to upload</p>
 					{fileList.map((item, index) => (
 						<div key={index} className="drop-file-preview__item">
-							<img
-								src={ImageConfig[item.type.split('/')[1]] || ImageConfig['default']}
-								alt=""
-							/>
+							{type === 'image/png' ? (
+								<img src={file || ImageConfig['default']} alt="" />
+							) : (
+								<img
+									src={ImageConfig[item.type.split('/')[1]] || ImageConfig['default']}
+									alt=""
+								/>
+							)}
 							<div className="drop-file-preview__item__info">
 								<p>{item.name}</p>
 								<p>{item.size}B</p>
