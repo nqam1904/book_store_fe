@@ -9,7 +9,7 @@ const CardItem = forwardRef((props, ref) => {
 			<Card.Img
 				variant="top"
 				className="image-item"
-				src={props.image ? `${IMG_URL}` + `/${props.image}` : images.no_image.default}
+				src={props.image ? `${IMG_URL}` + `${props.image}` : images.no_image.default}
 			/>
 			<Card.Body>
 				<Card.Title>{props.title}</Card.Title>

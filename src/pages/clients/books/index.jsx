@@ -1,117 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { HeaderClient, CardItem } from 'components'
 
 import { Breadcrumb, Card, Button } from 'react-bootstrap'
 import FlipMove from 'react-flip-move'
 import Search from './Search'
 import './index.scss'
-const data = [
-	{
-		images: [
-			{
-				id: 1,
-				key: '1631985539757.jpg',
-				size: 21402,
-				type: 'image/png',
-				name: '219254490_784008618946015_7154910683507869990_n.png',
-				createDate: '2021-09-18T16:28:36.781Z',
-				writeDate: '2021-09-18T16:28:36.781Z',
-			},
-		],
-		categories: [
-			{
-				id: 1,
-				name: 'Java',
-				createDate: '2021-09-13T17:08:10.289Z',
-				writeDate: '2021-09-13T17:14:18.015Z',
-			},
-		],
-		id: 11,
-		title: 'Java Clear Code',
-		author: 'aaa',
-		createDate: '2021-09-19T10:53:00.227Z',
-		writeDate: '2021-09-19T10:53:00.227Z',
-	},
-	{
-		images: [
-			{
-				id: 1,
-				key: '1631985539757.jpg',
-				size: 21402,
-				type: 'image/png',
-				name: '219254490_784008618946015_7154910683507869990_n.png',
-				createDate: '2021-09-18T16:28:36.781Z',
-				writeDate: '2021-09-18T16:28:36.781Z',
-			},
-		],
-		categories: [
-			{
-				id: 1,
-				name: 'Java',
-				createDate: '2021-09-13T17:08:10.289Z',
-				writeDate: '2021-09-13T17:14:18.015Z',
-			},
-		],
-		id: 12,
-		title: 'Java Clear Code',
-		author: 'aaa',
-		createDate: '2021-09-19T10:53:00.227Z',
-		writeDate: '2021-09-19T10:53:00.227Z',
-	},
-	{
-		images: [
-			{
-				id: 1,
-				key: '1631985539757.jpg',
-				size: 21402,
-				type: 'image/png',
-				name: '219254490_784008618946015_7154910683507869990_n.png',
-				createDate: '2021-09-18T16:28:36.781Z',
-				writeDate: '2021-09-18T16:28:36.781Z',
-			},
-		],
-		categories: [
-			{
-				id: 1,
-				name: 'Java',
-				createDate: '2021-09-13T17:08:10.289Z',
-				writeDate: '2021-09-13T17:14:18.015Z',
-			},
-		],
-		id: 15,
-		title: 'Java Clear Code',
-		author: 'aaa',
-		createDate: '2021-09-19T10:53:00.227Z',
-		writeDate: '2021-09-19T10:53:00.227Z',
-	},
-	{
-		images: [
-			{
-				id: 1,
-				key: '1631985539757.jpg',
-				size: 21402,
-				type: 'image/png',
-				name: '219254490_784008618946015_7154910683507869990_n.png',
-				createDate: '2021-09-18T16:28:36.781Z',
-				writeDate: '2021-09-18T16:28:36.781Z',
-			},
-		],
-		categories: [
-			{
-				id: 1,
-				name: 'Java',
-				createDate: '2021-09-13T17:08:10.289Z',
-				writeDate: '2021-09-13T17:14:18.015Z',
-			},
-		],
-		id: 13,
-		title: 'Java Clear Code',
-		author: 'aaa',
-		createDate: '2021-09-19T10:53:00.227Z',
-		writeDate: '2021-09-19T10:53:00.227Z',
-	},
-]
+import { listBookSelector } from 'redux/selectores/bookSelector'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { getListBookAction } from 'redux/actions/bookAction'
+
 const Books = () => {
+	const dispatch = useDispatch()
+	const data = useSelector(listBookSelector)
+	useEffect(() => {
+		dispatch(getListBookAction())
+	}, [])
+
 	const listBook = data.map((item) => {
 		return (
 			<FlipMove
