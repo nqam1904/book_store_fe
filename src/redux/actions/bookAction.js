@@ -1,3 +1,5 @@
+import { createAction } from '@reduxjs/toolkit'
+
 export const GET_LIST_BOOK = 'GET_LIST_BOOK'
 export const getListBookAction = () => {
 	return {
@@ -11,7 +13,9 @@ export const getListBookSuccess = (payload) => {
 		payload,
 	}
 }
-
+//******************** */
+export const CREATE_BOOK = 'CREATE_BOOK'
+export const createBookAction = createAction(CREATE_BOOK)
 //******************** */
 export const GET_LIST_CATEGORY = 'GET_LIST_CATEGORY'
 export const getListCategoryAction = () => {

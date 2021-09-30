@@ -5,7 +5,9 @@ import { toast } from 'react-toastify'
 import optionToast from 'utils/Toast'
 import booksApi from 'api/booksApi'
 import categoryAPi from 'api/categoryApi'
+import mediaApi from 'api/mediaApi'
 import { DialogCategoryRef } from 'pages/admin/category'
+import { DialogCreateBookRef } from 'pages/admin/books'
 const option = optionToast
 
 //********************************* */
@@ -14,6 +16,23 @@ function* getListBookSaga(action) {
 		Loading.show()
 		const response = yield call(booksApi.getAll)
 		yield put(Action.getListBookSuccess(response))
+	} catch (error) {
+		toast.error(`${error}`, option)
+	} finally {
+		Loading.hide()
+	}
+}
+//********************************* */
+function* createBookSaga(action) {
+	try {
+		Loading.show()
+		console.log(action.payload.file)
+		const file = yield call(mediaApi.upload, action.payload.file)
+		console.log(file, 'file after upload')
+		// const response = yield call(booksApi.add, { ...action.payload, imagesId: file.mediasId })
+		yield put(Action.getListBookAction())
+		DialogCreateBookRef.current.close()
+		toast.success(`Create new book success`, option)
 	} catch (error) {
 		toast.error(`${error}`, option)
 	} finally {
@@ -32,6 +51,7 @@ function* getListCategorySaga(action) {
 		Loading.hide()
 	}
 }
+
 //********************************* */
 function* createCategorySaga(action) {
 	try {
@@ -75,6 +95,7 @@ function* deleteCategorySaga(action) {
 }
 export default function* () {
 	yield takeLatest(Action.GET_LIST_BOOK, getListBookSaga)
+	yield takeLatest(Action.CREATE_BOOK, createBookSaga)
 	yield takeLatest(Action.GET_LIST_CATEGORY, getListCategorySaga)
 	yield takeLatest(Action.CREATE_CATEGORY, createCategorySaga)
 	yield takeLatest(Action.EDIT_CATEGORY, editCategorySaga)

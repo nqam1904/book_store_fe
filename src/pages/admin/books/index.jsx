@@ -4,34 +4,35 @@ import { Button, Table } from 'react-bootstrap'
 import { Diaglog, InputField, DropFileInput, DropDown } from 'components'
 import { useDispatch, useSelector } from 'react-redux'
 import { listBookSelector, listCategorySelector } from 'redux/selectores/bookSelector'
-import { getListBookAction, getListCategoryAction } from 'redux/actions/bookAction'
+import {
+	createBookAction,
+	getListBookAction,
+	getListCategoryAction,
+} from 'redux/actions/bookAction'
 import { format } from 'date-fns'
 import './index.scss'
 import { formatSubstring } from 'utils/function'
 import { uploadAction } from 'redux/actions/uploadAction'
 import { fileSelector } from 'redux/selectores/uploadSelector'
-
+export const DialogCreateBookRef = React.createRef()
 const Book = () => {
 	const [title, setTitle] = useState('')
 	const [author, setAuthor] = useState('')
 	const [category, setCategory] = useState('')
 	const [file, setFile] = useState([])
 	const [isEdit, setIsEdit] = useState(false)
-	const DialogRef = useRef()
 	const titleRef = useRef()
 	const authorRef = useRef()
 
 	const dispatch = useDispatch()
 	const listBook = useSelector(listBookSelector)
 	const listCategory = useSelector(listCategorySelector)
-	const files = useSelector(fileSelector)
-	
+
 	useEffect(() => {
 		dispatch(getListCategoryAction())
-	}, [])
-	useEffect(() => {
 		dispatch(getListBookAction())
 	}, [])
+
 	const onChangeTitle = (e) => {
 		e.preventDefault()
 		setTitle(e.target.value)
@@ -45,13 +46,25 @@ const Book = () => {
 	}
 
 	const openDialog = () => {
-		DialogRef.current.open()
+		DialogCreateBookRef.current.open()
+		setTitle('')
+		setAuthor('')
+		setCategory('')
+		setFile('')
+		setIsEdit(false)
 	}
 
 	const onSubmit = (e) => {
 		e.preventDefault()
-		if (!!title && !!author) {
-			console.log('done')
+		if (!!title && !!author && !!category) {
+			dispatch(
+				createBookAction({
+					title,
+					author,
+					categoriesId: [category],
+					file,
+				})
+			)
 		} else {
 			title === '' && titleRef.current.showError('Please enter title!')
 			author === '' && authorRef.current.showError('Please enter author!')
@@ -61,12 +74,12 @@ const Book = () => {
 		setCategory(value)
 	}
 	const openDialogEdit = () => {
-		DialogRef.current.open()
+		DialogCreateBookRef.current.open()
 		setIsEdit(true)
 	}
 	const onRemove = (id) => {}
 	const onFileChange = (files) => {
-		dispatch(uploadAction(files))
+		setFile(files)
 	}
 	return (
 		<div className="container">
@@ -115,7 +128,7 @@ const Book = () => {
 			</Table>
 
 			<Diaglog
-				ref={DialogRef}
+				ref={DialogCreateBookRef}
 				title={isEdit ? 'Update Book' : 'Create Book'}
 				onSubmit={onSubmit}
 				size="lg">
@@ -157,7 +170,7 @@ const Book = () => {
 						</div>
 						<br />
 						<div className="drop-image">
-							<DropFileInput onFileChange={(files) => onFileChange(files)} />
+							<DropFileInput onFileChange={onFileChange} />
 						</div>
 					</div>
 				</form>
