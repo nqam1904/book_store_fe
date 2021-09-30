@@ -61,7 +61,7 @@ const Book = () => {
 				createBookAction({
 					title,
 					author,
-					categoriesId: [category],
+					categoriesId: [category.value],
 					file,
 				})
 			)
@@ -106,7 +106,7 @@ const Book = () => {
 				<tbody>
 					{listBook.map((item, index) => (
 						<tr key={item.id + index}>
-							<td>{item?.images[0].key}</td>
+							<td>{item?.images[0]?.key}</td>
 							<td>{formatSubstring(item?.title)}</td>
 							<td>{item?.author}</td>
 							<td>{item?.categories?.map((item) => item?.name)}</td>

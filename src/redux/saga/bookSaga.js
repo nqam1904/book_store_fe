@@ -26,10 +26,8 @@ function* getListBookSaga(action) {
 function* createBookSaga(action) {
 	try {
 		Loading.show()
-		console.log(action.payload.file)
 		const file = yield call(mediaApi.upload, action.payload.file)
-		console.log(file, 'file after upload')
-		// const response = yield call(booksApi.add, { ...action.payload, imagesId: file.mediasId })
+		const response = yield call(booksApi.add, { ...action.payload, imagesId: file.mediasId })
 		yield put(Action.getListBookAction())
 		DialogCreateBookRef.current.close()
 		toast.success(`Create new book success`, option)
