@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+@import './assets/colors.scss';
+
+.mt-10 {
+	margin-top: 10px;
+}
+.ml-10 {
+	margin-left: 10px;
+}
+.mr-10 {
+	margin-right: 10px;
+}
+.mbt-10 {
+	margin-bottom: 10px;
+}
+html {
+	overflow-x: hidden;
+	scroll-padding-top: 5rem;
+	scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar {
+	width: 1rem;
+}
+
+html::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+	background: $black;
+}
+section {
+	padding: 5rem 9%;
+}
+
+/* media queries  */
+
+@media (max-width: 991px) {
+	.header .header-1 {
+		padding: 2rem;
+	}
+
+	section {
+		padding: 3rem 2rem;
+	}
+}
+
+@media (max-width: 768px) {
+	html {
+		scroll-padding-top: 0;
+	}
+
+	body {
+		padding-bottom: 6rem;
+	}
+
+	.header .header-2 {
+		display: none;
+	}
+
+	.bottom-navbar-header {
+		display: block !important;
+	}
+
+	.header .header-1 {
+		box-shadow: var(--box-shadow);
+		position: relative;
+	}
+}
+
+@media (max-width: 450px) {
+}

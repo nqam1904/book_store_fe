@@ -121,7 +121,7 @@ const Book = () => {
 					{listBook.map((item, index) => (
 						<tr key={item.id + index}>
 							<td>
-								<img src={IMG_URL + item?.images[0]?.key} class="image_book" />
+								<img src={IMG_URL + item?.images[0]?.key} className="image_book" />
 							</td>
 							<td>{formatSubstring(item?.title)}</td>
 							<td>{item?.author}</td>

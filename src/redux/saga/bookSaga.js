@@ -13,13 +13,11 @@ const option = optionToast
 //********************************* */
 function* getListBookSaga(action) {
 	try {
-		Loading.show()
 		const response = yield call(booksApi.getAll)
 		yield put(Action.getListBookSuccess(response))
 	} catch (error) {
 		toast.error(`${error}`, option)
 	} finally {
-		Loading.hide()
 	}
 }
 //********************************* */
@@ -59,13 +57,11 @@ function* deleteBookSaga(action) {
 //********************************* */
 function* getListCategorySaga(action) {
 	try {
-		Loading.show()
 		const response = yield call(categoryAPi.getAll)
 		yield put(Action.getListCategorySuccess(response))
 	} catch (error) {
 		toast.error(`${error}`, option)
 	} finally {
-		Loading.hide()
 	}
 }
 

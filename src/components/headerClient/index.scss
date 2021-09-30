@@ -1,22 +1,122 @@
 @import '../../assets/colors.scss';
 
-.current {
+.heading {
+	text-align: center;
+	margin-bottom: 2rem;
 	position: relative;
-	color: $primary !important;
-	opacity: 1 !important;
-	border-color: #1f1f1f;
-	&::before {
-		content: '';
-		display: block;
-		position: absolute;
-		height: 4px;
-		width: 60%;
-		left: 20%;
-		bottom: -4px;
-		background: $valid;
-		-webkit-transition: bottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-		transition: bottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-		border-top-right-radius: 3px;
-		border-top-left-radius: 3px;
-	}
+}
+
+.heading::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 0;
+	transform: translateY(-50%);
+	width: 100%;
+	height: 0.01rem;
+	background: rgba(0, 0, 0, 0.1);
+	z-index: -1;
+}
+
+.heading span {
+	font-size: 3rem;
+	padding: 0.5rem 2rem;
+	color: $black;
+	background: $white;
+	border: $border;
+}
+
+.btn {
+	margin-top: 1rem;
+	display: inline-block;
+	padding: 0.9rem 3rem;
+	border-radius: 0.5rem;
+	color: $white;
+	background: $green;
+	font-size: 1.7rem;
+	cursor: pointer;
+	font-weight: 500;
+}
+
+.btn:hover {
+	background: $dark-color;
+}
+
+.header .header-1 {
+	background: $white;
+	padding: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.header .header-1 .logo {
+	font-size: 1.5rem;
+	font-weight: bolder;
+	color: $black;
+}
+
+.header .header-1 .logo i {
+	color: $green;
+}
+
+.header .header-1 .icons div,
+.header .header-1 .icons a {
+	font-size: 1.5rem;
+	margin-left: 1.5rem;
+	color: $black;
+	cursor: pointer;
+}
+
+.header .header-1 .icons div:hover,
+.header .header-1 .icons a:hover {
+	color: $green;
+}
+
+.header .header-2 {
+	background: $green;
+}
+
+.header .header-2 .navbar-header {
+	text-align: center;
+}
+
+.header .header-2 .navbar-header a {
+	color: #fff;
+	display: inline-block;
+	padding: 16px;
+	font-size: 20px;
+}
+
+.header .header-2 .navbar-header a:hover {
+	background: $dark-color;
+}
+
+.header .header-2.active {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+}
+
+.bottom-navbar-header {
+	text-align: center;
+	background: $green;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	display: none;
+}
+
+.bottom-navbar-header a {
+	font-size: 2.5rem;
+	padding: 2rem;
+	color: $white;
+}
+
+.bottom-navbar-header a:hover {
+	background: $dark-color;
 }

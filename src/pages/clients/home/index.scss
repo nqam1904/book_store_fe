@@ -1,0 +1,99 @@
+@import '../../../assets/colors.scss';
+
+.title-book {
+	text-align: center;
+	margin-bottom: 2rem;
+	position: relative;
+}
+.title-book::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 0;
+	transform: translateY(-50%);
+	width: 100%;
+	height: 0.01rem;
+	background: rgba(0, 0, 0, 0.1);
+	z-index: -1;
+}
+.title-book span {
+	font-size: 24px;
+	padding: 0.5rem 2rem;
+	color: #444;
+	background: $white;
+	border: 0.1rem solid rgba(0, 0, 0, 0.1);
+}
+.list-book {
+	display: flex;
+	flex-wrap: wrap;
+}
+.item-book {
+	width: 18rem;
+	height: 25rem;
+	margin-left: 5rem;
+	margin-top: 20px;
+	gap: 1.5rem;
+	position: relative;
+}
+
+h5 {
+	display: block;
+	background-color: $green;
+	color: $white;
+	width: 18rem;
+	padding: 0.5rem;
+	border-radius: 0 0 12px 12px;
+	transform: translate3d(0, -100%, 0);
+	transition: transform 300ms;
+	text-align: center;
+}
+
+.image {
+	width: 18rem;
+	height: 25rem;
+	border-radius: 12px 12px 12px 12px;
+	background-size: contain;
+}
+
+.overlay {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(4, 18, 26, 0.4);
+	overflow: hidden;
+	width: 18rem;
+	height: 0;
+	border-radius: 12px 12px 12px 12px;
+	transition: 0.5s ease;
+}
+
+.item-book:hover .overlay {
+	height: 100% !important;
+	cursor: pointer !important;
+}
+.overlay-icons {
+	color: white;
+	font-size: 20px;
+	display: flex;
+	justify-content: space-evenly;
+	margin-top: 2.5rem;
+}
+
+.overlay-icons span:hover,
+.overlay-icons div:hover {
+	color: $green;
+}
+
+.description {
+	color: white;
+	font-size: 20px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	text-align: center;
+	width: 200px;
+}

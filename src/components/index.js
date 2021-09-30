@@ -9,6 +9,7 @@ import Breadcrumb from './breadCrumb/Breadcrumb'
 import CardItem from './card/CardItem'
 import DropFileInput from './dropFileInput/DropFileInput'
 import DropDown from './dropdown/DropDown'
+import Canvas from './offCanvas/Canvas'
 export {
 	Header,
 	Diaglog,
@@ -21,4 +22,5 @@ export {
 	CardItem,
 	DropFileInput,
 	DropDown,
+	Canvas,
 }

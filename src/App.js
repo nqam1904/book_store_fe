@@ -1,7 +1,7 @@
 import { Switch, Route } from 'react-router-dom'
 import PrivateRoute from 'guard/PrivateRoute'
 import { Auth, Client, Admin, Books, Document } from 'pages'
-import './App.css'
+import './App.scss'
 import { NotFound } from 'components'
 import { ConnectedRouter } from 'connected-react-router'
 import PropTypes from 'prop-types'
