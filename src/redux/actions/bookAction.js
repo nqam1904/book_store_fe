@@ -17,6 +17,9 @@ export const getListBookSuccess = (payload) => {
 export const CREATE_BOOK = 'CREATE_BOOK'
 export const createBookAction = createAction(CREATE_BOOK)
 //******************** */
+export const DELETE_BOOK = 'DELETE_BOOK'
+export const deleteBookAction = createAction(DELETE_BOOK)
+//******************** */
 export const GET_LIST_CATEGORY = 'GET_LIST_CATEGORY'
 export const getListCategoryAction = () => {
 	return {

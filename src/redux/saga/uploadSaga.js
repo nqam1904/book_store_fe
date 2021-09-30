@@ -10,7 +10,6 @@ const option = optionToast
 function* getFileUpload(action) {
 	try {
 		const response = yield call(mediaApi.upload, action.payload)
-		console.log(response, 'saga')
 		yield put(Action.uploadFileSuccess(response))
 	} catch (error) {
 		toast.error(`${error}`, option)

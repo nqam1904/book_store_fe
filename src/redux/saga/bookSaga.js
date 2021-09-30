@@ -24,18 +24,32 @@ function* getListBookSaga(action) {
 }
 //********************************* */
 function* createBookSaga(action) {
-	// console.log(action.payload)
 	try {
 		Loading.show()
 		const file = yield all([
-			call(mediaApi.upload, action.payload.file),
 			call(mediaApi.upload, action.payload.fileImage),
+			call(mediaApi.upload, action.payload.file),
 		])
-		console.log(file)
-		// const response = yield call(booksApi.add, { ...action.payload, imagesId: file.mediasId })
+		const response = yield call(booksApi.add, {
+			...action.payload,
+			imagesId: [...file[0].mediasId, ...file[1].mediasId],
+		})
 		yield put(Action.getListBookAction())
 		DialogCreateBookRef.current.close()
 		toast.success(`Create new book success`, option)
+	} catch (error) {
+		toast.error(`${error}`, option)
+	} finally {
+		Loading.hide()
+	}
+}
+//********************************* */
+function* deleteBookSaga(action) {
+	try {
+		Loading.show()
+		const response = yield call(booksApi.remove, action.payload)
+		yield put(Action.getListBookAction())
+		toast.success(`Remove book success`, option)
 	} catch (error) {
 		toast.error(`${error}`, option)
 	} finally {
@@ -99,6 +113,7 @@ function* deleteCategorySaga(action) {
 export default function* () {
 	yield takeLatest(Action.GET_LIST_BOOK, getListBookSaga)
 	yield takeLatest(Action.CREATE_BOOK, createBookSaga)
+	yield takeLatest(Action.DELETE_BOOK, deleteBookSaga)
 	yield takeLatest(Action.GET_LIST_CATEGORY, getListCategorySaga)
 	yield takeLatest(Action.CREATE_CATEGORY, createCategorySaga)
 	yield takeLatest(Action.EDIT_CATEGORY, editCategorySaga)

@@ -13,7 +13,7 @@ const axiosClient = axios.create({
 // Add a request interceptor
 axiosClient.interceptors.request.use(
 	function (config) {
-		config.headers['jwt'] = localStorage.getItem(StorageKeys.TOKEN)
+		config.headers['Authorization'] = 'Bearer ' + localStorage.getItem(StorageKeys.TOKEN)
 		return config
 	},
 	function (error) {

@@ -2,12 +2,14 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Diaglog, DropDown, DropFileInput, InputField } from 'components'
+import { IMG_URL } from 'config'
 import { format } from 'date-fns'
 import React, { useEffect, useRef, useState } from 'react'
 import { Button, Form, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import {
 	createBookAction,
+	deleteBookAction,
 	getListBookAction,
 	getListCategoryAction,
 } from 'redux/actions/bookAction'
@@ -82,9 +84,11 @@ const Book = () => {
 		DialogCreateBookRef.current.open()
 		setIsEdit(true)
 	}
-	const onRemove = (id) => {}
-	const onChangeFileImage = (files) => {
-		setFileImage(files)
+	const onRemove = (id) => {
+		dispatch(deleteBookAction(id))
+	}
+	const onChangeFileImage = (e) => {
+		setFileImage(e.target.files)
 	}
 	const onFileChange = (files) => {
 		setFile(files)
@@ -116,13 +120,19 @@ const Book = () => {
 				<tbody>
 					{listBook.map((item, index) => (
 						<tr key={item.id + index}>
-							<td>{item?.images[0]?.key}</td>
+							<td>
+								<img src={IMG_URL + item?.images[0]?.key} class="image_book" />
+							</td>
 							<td>{formatSubstring(item?.title)}</td>
 							<td>{item?.author}</td>
 							<td>{item?.categories?.map((item) => item?.name)}</td>
 							<td>{format(new Date(item?.createDate), 'dd-LL-yyyy')}</td>
 							<th>
-								<FontAwesomeIcon className="faicon" icon="eye" />
+								<FontAwesomeIcon
+									className="faicon"
+									icon="eye"
+									onClick={() => window.open(IMG_URL + item?.images[1]?.key, '_blank')}
+								/>
 							</th>
 							<td className="text-center">
 								<Button
