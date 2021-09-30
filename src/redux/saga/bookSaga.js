@@ -1,4 +1,4 @@
-import { put, takeLatest, call } from 'redux-saga/effects'
+import { put, takeLatest, call, all } from 'redux-saga/effects'
 import * as Action from 'redux/actions/bookAction'
 import { Loading } from 'components'
 import { toast } from 'react-toastify'
@@ -24,10 +24,15 @@ function* getListBookSaga(action) {
 }
 //********************************* */
 function* createBookSaga(action) {
+	// console.log(action.payload)
 	try {
 		Loading.show()
-		const file = yield call(mediaApi.upload, action.payload.file)
-		const response = yield call(booksApi.add, { ...action.payload, imagesId: file.mediasId })
+		const file = yield all([
+			call(mediaApi.upload, action.payload.file),
+			call(mediaApi.upload, action.payload.fileImage),
+		])
+		console.log(file)
+		// const response = yield call(booksApi.add, { ...action.payload, imagesId: file.mediasId })
 		yield put(Action.getListBookAction())
 		DialogCreateBookRef.current.close()
 		toast.success(`Create new book success`, option)

@@ -1,29 +1,32 @@
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faEye } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Diaglog, DropDown, DropFileInput, InputField } from 'components'
+import { format } from 'date-fns'
 import React, { useEffect, useRef, useState } from 'react'
-import './index.scss'
-import { Button, Table } from 'react-bootstrap'
-import { Diaglog, InputField, DropFileInput, DropDown } from 'components'
+import { Button, Form, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { listBookSelector, listCategorySelector } from 'redux/selectores/bookSelector'
 import {
 	createBookAction,
 	getListBookAction,
 	getListCategoryAction,
 } from 'redux/actions/bookAction'
-import { format } from 'date-fns'
-import './index.scss'
+import { listBookSelector, listCategorySelector } from 'redux/selectores/bookSelector'
 import { formatSubstring } from 'utils/function'
-import { uploadAction } from 'redux/actions/uploadAction'
-import { fileSelector } from 'redux/selectores/uploadSelector'
+import './index.scss'
+library.add(faEye)
 export const DialogCreateBookRef = React.createRef()
 const Book = () => {
 	const [title, setTitle] = useState('')
 	const [author, setAuthor] = useState('')
 	const [category, setCategory] = useState('')
 	const [file, setFile] = useState([])
+	const [fileImage, setFileImage] = useState([])
+
 	const [isEdit, setIsEdit] = useState(false)
 	const titleRef = useRef()
 	const authorRef = useRef()
-
+	const cateRef = useRef()
 	const dispatch = useDispatch()
 	const listBook = useSelector(listBookSelector)
 	const listCategory = useSelector(listCategorySelector)
@@ -63,11 +66,13 @@ const Book = () => {
 					author,
 					categoriesId: [category.value],
 					file,
+					fileImage,
 				})
 			)
 		} else {
 			title === '' && titleRef.current.showError('Please enter title!')
 			author === '' && authorRef.current.showError('Please enter author!')
+			category === '' && cateRef.current.showError('Please enter author!')
 		}
 	}
 	const onChange = (value) => {
@@ -78,9 +83,13 @@ const Book = () => {
 		setIsEdit(true)
 	}
 	const onRemove = (id) => {}
+	const onChangeFileImage = (files) => {
+		setFileImage(files)
+	}
 	const onFileChange = (files) => {
 		setFile(files)
 	}
+
 	return (
 		<div className="container">
 			<div className="nav_user">
@@ -100,6 +109,7 @@ const Book = () => {
 						<th>Author</th>
 						<th>Categories</th>
 						<th>Create Date</th>
+						<th>PDF</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -111,6 +121,9 @@ const Book = () => {
 							<td>{item?.author}</td>
 							<td>{item?.categories?.map((item) => item?.name)}</td>
 							<td>{format(new Date(item?.createDate), 'dd-LL-yyyy')}</td>
+							<th>
+								<FontAwesomeIcon className="faicon" icon="eye" />
+							</th>
 							<td className="text-center">
 								<Button
 									variant="warning"
@@ -158,6 +171,7 @@ const Book = () => {
 						</div>
 						<div className="form-group">
 							<DropDown
+								ref={cateRef}
 								title="Category"
 								options={listCategory.map((item) => {
 									return {
@@ -169,7 +183,12 @@ const Book = () => {
 							/>
 						</div>
 						<br />
+						<Form.Group controlId="formFile" className="mt-10">
+							<Form.Label className="mt-10">Image thumbnail</Form.Label>
+							<Form.Control type="file" onChange={onChangeFileImage} />
+						</Form.Group>
 						<div className="drop-image">
+							<Form.Label className="mbt-10">PDF</Form.Label>
 							<DropFileInput onFileChange={onFileChange} />
 						</div>
 					</div>
