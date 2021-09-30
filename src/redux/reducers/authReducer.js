@@ -1,4 +1,3 @@
-import StorageKeys from 'constants/Storage-key'
 import * as Action from 'redux/actions/loginAction'
 const initialState = {
 	user: {

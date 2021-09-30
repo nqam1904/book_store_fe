@@ -1,35 +1,37 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './index.scss'
 import { Button, Table } from 'react-bootstrap'
-import { Diaglog, InputField, DropFileInput } from 'components'
+import { Diaglog, InputField, DropFileInput, DropDown } from 'components'
 import { useDispatch, useSelector } from 'react-redux'
 import { listBookSelector, listCategorySelector } from 'redux/selectores/bookSelector'
 import { getListBookAction, getListCategoryAction } from 'redux/actions/bookAction'
 import { format } from 'date-fns'
 import './index.scss'
 import { formatSubstring } from 'utils/function'
+import { uploadAction } from 'redux/actions/uploadAction'
+import { fileSelector } from 'redux/selectores/uploadSelector'
 
 const Book = () => {
 	const [title, setTitle] = useState('')
 	const [author, setAuthor] = useState('')
-	const [category, setCategory] = useState([])
+	const [category, setCategory] = useState('')
 	const [file, setFile] = useState([])
 	const [isEdit, setIsEdit] = useState(false)
 	const DialogRef = useRef()
 	const titleRef = useRef()
 	const authorRef = useRef()
-	const categoryRef = useRef()
 
 	const dispatch = useDispatch()
 	const listBook = useSelector(listBookSelector)
 	const listCategory = useSelector(listCategorySelector)
+	const files = useSelector(fileSelector)
+	
 	useEffect(() => {
 		dispatch(getListCategoryAction())
 	}, [])
 	useEffect(() => {
 		dispatch(getListBookAction())
 	}, [])
-
 	const onChangeTitle = (e) => {
 		e.preventDefault()
 		setTitle(e.target.value)
@@ -55,14 +57,16 @@ const Book = () => {
 			author === '' && authorRef.current.showError('Please enter author!')
 		}
 	}
-	const onChange = () => {}
+	const onChange = (value) => {
+		setCategory(value)
+	}
 	const openDialogEdit = () => {
 		DialogRef.current.open()
 		setIsEdit(true)
 	}
 	const onRemove = (id) => {}
 	const onFileChange = (files) => {
-		console.log(files)
+		dispatch(uploadAction(files))
 	}
 	return (
 		<div className="container">
@@ -140,26 +144,16 @@ const Book = () => {
 							/>
 						</div>
 						<div className="form-group">
-							<label>
-								Category <sup className="sub_text">*</sup>
-							</label>
-							<select
-								className="form-control"
-								size="as"
-								as="select"
+							<DropDown
+								title="Category"
+								options={listCategory.map((item) => {
+									return {
+										label: item.name,
+										value: item.id,
+									}
+								})}
 								onChange={onChange}
-								value={setCategory}
-								name="selectCategory">
-								{/* <option>---Category---</option> */}
-								{listCategory &&
-									listCategory.map((item, index) => {
-										return (
-											<option value={item.id} key={index}>
-												{item.name}
-											</option>
-										)
-									})}
-							</select>
+							/>
 						</div>
 						<br />
 						<div className="drop-image">

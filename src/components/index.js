@@ -8,6 +8,7 @@ import Footer from './footer/Footer'
 import Breadcrumb from './breadCrumb/Breadcrumb'
 import CardItem from './card/CardItem'
 import DropFileInput from './dropFileInput/DropFileInput'
+import DropDown from './dropdown/DropDown'
 export {
 	Header,
 	Diaglog,
@@ -19,4 +20,5 @@ export {
 	Breadcrumb,
 	CardItem,
 	DropFileInput,
+	DropDown,
 }
