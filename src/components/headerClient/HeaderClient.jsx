@@ -4,6 +4,7 @@ import { Button } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { loginAction } from 'redux/actions/loginAction'
 import { validateEmail } from 'utils/function'
 import './index.scss'
 const HeaderClient = () => {
@@ -29,7 +30,7 @@ const HeaderClient = () => {
 		e.preventDefault()
 		if (!!email && !!password) {
 			validateEmail(email)
-				? console.log('done')
+				? dispatch(loginAction({ email, password }))
 				: toast.error('Email is not valid', { theme: 'dark' })
 		} else {
 			email === '' && emailRef.current.showError('Please enter email!')
