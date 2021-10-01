@@ -1,6 +1,5 @@
-import { InputField, Canvas } from 'components'
+import { InputField, Canvas, ButtonDiscord, ButtonLogin } from 'components'
 import React, { useRef, useState } from 'react'
-import { Button } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -40,11 +39,7 @@ const HeaderClient = () => {
 	const onFormLogin = () => {
 		canvasRef.current.open()
 	}
-	const onLoginDiscord = () => {
-		window.open(
-			'https://discord.com/api/oauth2/authorize?client_id=893506542073171968&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&response_type=code&scope=identify%20email'
-		)
-	}
+
 	return (
 		<>
 			<header className="header">
@@ -63,7 +58,7 @@ const HeaderClient = () => {
 					<nav className="navbar-header">
 						<Link to="#home">Home</Link>
 						<Link to="#book">Book</Link>
-						<Link to="#document">Document</Link>
+						<Link to="#blog">Blog</Link>
 						<Link to="#reviews">Reviews</Link>
 						<Link to="#about">About</Link>
 					</nav>
@@ -73,12 +68,12 @@ const HeaderClient = () => {
 			<nav className="bottom-navbar-header">
 				<Link to="#home" className="fas fa-home"></Link>
 				<Link to="#book" className="fas fa-list"></Link>
-				<Link to="#document" className="fas fa-tags"></Link>
+				<Link to="#blog" className="fas fa-tags"></Link>
 				<Link to="#reviews" className="fas fa-comments"></Link>
 				<Link to="#about" className="fas fa-blog"></Link>
 			</nav>
 			<Canvas ref={canvasRef} title="Login" placement="end" scroll={true} backdrop={true}>
-				<form onSubmit={onSubmit}>
+				<form>
 					<InputField
 						ref={emailRef}
 						name="email"
@@ -98,13 +93,26 @@ const HeaderClient = () => {
 						onChange={onChangePassword}
 						value={password}
 					/>
-					<Button variant="success" type="submit">
-						Login
-					</Button>
 
-					<Button variant="success" onClick={onLoginDiscord}>
-						Discord
-					</Button>
+					<div className="d-grid gap-2">
+						<ButtonLogin onClick={onSubmit} />
+						<div className="text-center option-social">
+							<hr class="flex-fill m-0"></hr>
+							<span className="text-or">OR</span>
+							<hr class="flex-fill m-0"></hr>
+						</div>
+
+						<ButtonDiscord />
+					</div>
+
+					<div className="sign-up">
+						<p>
+							Forget password? <Link to="#">Click here</Link>
+						</p>
+						<p>
+							Don't have an account? <Link to="#">Create one</Link>
+						</p>
+					</div>
 				</form>
 			</Canvas>
 		</>

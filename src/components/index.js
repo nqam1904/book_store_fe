@@ -10,6 +10,8 @@ import CardItem from './card/CardItem'
 import DropFileInput from './dropFileInput/DropFileInput'
 import DropDown from './dropdown/DropDown'
 import Canvas from './offCanvas/Canvas'
+import ButtonDiscord from './button/ButtonDiscord'
+import ButtonLogin from './button/ButtonLogin'
 export {
 	Header,
 	Diaglog,
@@ -23,4 +25,6 @@ export {
 	DropFileInput,
 	DropDown,
 	Canvas,
+	ButtonDiscord,
+	ButtonLogin,
 }

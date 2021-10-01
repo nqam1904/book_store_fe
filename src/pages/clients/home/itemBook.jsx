@@ -17,7 +17,7 @@ const ItemBook = (props) => {
 				{props.name}
 			</h5>
 			<div className="overlay">
-				<div class="overlay-icons">
+				<div className="overlay-icons">
 					<span className="fas fa-heart" onClick={props.onFavorite}></span>
 					<div className="fas fa-eye" onClick={props.onViewPdf}></div>
 				</div>

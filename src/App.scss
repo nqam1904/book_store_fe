@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
 @import './assets/colors.scss';
-
+.m-0 {
+	margin: 0 !important;
+}
+.flex-fill {
+	flex: 1 1 auto !important;
+}
 .mt-10 {
 	margin-top: 10px;
 }
