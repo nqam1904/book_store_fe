@@ -21,7 +21,7 @@ const Home = () => {
 			<HeaderClient />
 			<section className="featured" id="books">
 				<h4 className="title-book">
-					<span>featured books</span>
+					<span>Featured Books</span>
 				</h4>
 				<div className="list-book mt-10">
 					{listBook.map((item, index) => {
