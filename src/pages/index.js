@@ -8,6 +8,6 @@ import Category from './admin/category'
 //*************Client**********
 import Client from './clients/home'
 import Books from './clients/books'
-import Document from './clients/document'
+import Blog from './clients/blog'
 
-export { User, Book, Admin, Category, Auth, Client, Books, Document }
+export { User, Book, Admin, Category, Auth, Client, Books, Blog }

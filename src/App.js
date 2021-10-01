@@ -1,6 +1,6 @@
 import { Switch, Route } from 'react-router-dom'
 import PrivateRoute from 'guard/PrivateRoute'
-import { Auth, Client, Admin, Books, Document } from 'pages'
+import { Auth, Client, Admin, Books, Blog } from 'pages'
 import './App.scss'
 import { NotFound } from 'components'
 import { ConnectedRouter } from 'connected-react-router'
@@ -13,7 +13,7 @@ const App = ({ history }) => {
 			<Switch>
 				<Route exact path="/" component={Client} />
 				<Route path="/books" component={Books} />
-				<Route path="/documents" component={Document} />
+				<Route path="/blog" component={Blog} />
 				<Route path="/login" component={Auth} />
 				<PrivateRoute path="/admin" component={Admin} isAuthenticated={isAuthenticated} />
 				<Route path="*">

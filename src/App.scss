@@ -23,7 +23,19 @@ html {
 	scroll-padding-top: 5rem;
 	scroll-behavior: smooth;
 }
+body {
+	overflow-x: visible;
+	overflow: scroll; /* Show scrollbars */
+}
+body::-webkit-scrollbar {
+	display: none;
+}
 
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
 html::-webkit-scrollbar {
 	width: 1rem;
 }

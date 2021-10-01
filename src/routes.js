@@ -1,4 +1,4 @@
-import { User, Book, Books, Document, Category } from 'pages'
+import { User, Book, Books, Blog, Category } from 'pages'
 
 const routes = [
 	{
@@ -22,8 +22,8 @@ const routes = [
 		exact: false,
 	},
 	{
-		path: '/documents',
-		component: () => <Document />,
+		path: '/blog',
+		component: () => <Blog />,
 		exact: false,
 	},
 ]

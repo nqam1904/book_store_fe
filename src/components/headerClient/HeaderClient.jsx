@@ -56,9 +56,9 @@ const HeaderClient = () => {
 
 				<div className="header-2">
 					<nav className="navbar-header">
-						<Link to="#home">Home</Link>
-						<Link to="#book">Book</Link>
-						<Link to="#blog">Blog</Link>
+						<Link to="/">Home</Link>
+						<Link to="/books">Book</Link>
+						<Link to="/blog">Blog</Link>
 						<Link to="#reviews">Reviews</Link>
 						<Link to="#about">About</Link>
 					</nav>
