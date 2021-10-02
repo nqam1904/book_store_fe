@@ -131,6 +131,7 @@ const User = () => {
 						<th>Email</th>
 						<th>Phone</th>
 						<th>Active</th>
+						<th>Role</th>
 						<th>Create Date</th>
 						<th>Action</th>
 					</tr>
@@ -143,6 +144,7 @@ const User = () => {
 							<td>{item.email}</td>
 							<td>{item.phone}</td>
 							<td>{item.isActive + ''}</td>
+							<td>{item.role}</td>
 							<td>{format(new Date(item?.createDate), 'dd-LL-yyyy') + ''}</td>
 							<td className="text-center">
 								<Button
