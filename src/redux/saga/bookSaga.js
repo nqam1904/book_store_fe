@@ -17,7 +17,6 @@ function* getListBookSaga(action) {
 		yield put(Action.getListBookSuccess(response))
 	} catch (error) {
 		toast.error(`${error}`, option)
-	} finally {
 	}
 }
 //********************************* */
@@ -61,7 +60,6 @@ function* getListCategorySaga(action) {
 		yield put(Action.getListCategorySuccess(response))
 	} catch (error) {
 		toast.error(`${error}`, option)
-	} finally {
 	}
 }
 

@@ -9,6 +9,7 @@ import { listBookSelector } from 'redux/selectores/bookSelector'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { getListBookAction } from 'redux/actions/bookAction'
+import { images } from 'assets/images'
 
 const Books = () => {
 	const dispatch = useDispatch()
@@ -18,6 +19,7 @@ const Books = () => {
 	}, [])
 
 	const listBook = data.map((item) => {
+		console.log(item)
 		return (
 			<FlipMove
 				duration={300}
@@ -26,7 +28,12 @@ const Books = () => {
 				enterAnimation="fade"
 				leaveAnimation="fade"
 				key={item.id}>
-				<CardItem title={item.title} text={item.author} image={item.images[0].key} />
+				<CardItem
+					title={item.title}
+					text={item.author}
+					// image={images.loader_img}
+					pdf={item.images[1].key}
+				/>
 			</FlipMove>
 		)
 	})

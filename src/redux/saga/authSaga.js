@@ -15,13 +15,11 @@ function* loginSaga(action) {
 		Loading.show()
 		const response = yield call(loginApi.login, action.payload)
 		localStorage.setItem(StorageKeys.TOKEN, response.access_token)
-		yield put(
-			Action.loginSuccess({
-				...response.data,
-			})
-		)
+		if (response.data?.role === 'admin') {
+			history.push('/admin')
+		}
+		yield put(Action.loginSuccess(response.data))
 		toast.success('🚀 Success', option)
-		history.push('/admin')
 	} catch (error) {
 		toast.error(`${error}`, option)
 	} finally {
@@ -31,13 +29,10 @@ function* loginSaga(action) {
 //********************************* */
 function* getListAccountSaga(action) {
 	try {
-		Loading.show()
 		const response = yield call(userApi.getAll)
 		yield put(Action.getlistAccountSuccess(response))
 	} catch (error) {
 		toast.error(`${error}`, option)
-	} finally {
-		Loading.hide()
 	}
 }
 //********************************* */

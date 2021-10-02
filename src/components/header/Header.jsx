@@ -24,6 +24,9 @@ const Header = () => {
 						<Nav.Link as={Link} to="/admin/category">
 							Category
 						</Nav.Link>
+						<Nav.Link as={Link} to="/admin/blog">
+							Blog
+						</Nav.Link>
 					</Nav>
 				</Navbar.Collapse>
 				<Navbar.Collapse className="justify-content-end">

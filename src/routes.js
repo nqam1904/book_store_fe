@@ -1,4 +1,4 @@
-import { User, Book, Books, Blog, Category } from 'pages'
+import { User, Book, Books, Blog, Category, BlogAdmin } from 'pages'
 
 const routes = [
 	{
@@ -14,6 +14,11 @@ const routes = [
 	{
 		path: '/admin/category',
 		component: () => <Category />,
+		exact: false,
+	},
+	{
+		path: '/admin/blog',
+		component: () => <BlogAdmin />,
 		exact: false,
 	},
 	{

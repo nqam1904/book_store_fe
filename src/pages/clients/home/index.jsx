@@ -117,7 +117,7 @@ const Home = () => {
 
 				<div class="share">
 					<a href="#" class="fab fa-facebook-f"></a>
-					<a href="#" class="fab fa-discord"></a>
+					<a href="https://discord.gg/rt7myeRkjd" target="_blank" class="fab fa-discord"></a>
 				</div>
 
 				<div class="credit">
