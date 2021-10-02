@@ -1,13 +1,17 @@
-import axiosClient from "./axiosClient";
+import axiosClient from './axiosClient'
 
 const loginApi = {
-  /**
-   * login system admin
-   */
-  login(data) {
-    const url = "/auth/login";
-    return axiosClient.post(url, data);
-  },
-};
+	/**
+	 * login system admin
+	 */
+	login(data) {
+		const url = '/auth/login'
+		return axiosClient.post(url, data)
+	},
+	discord(code) {
+		const url = `/auth/discord?code=${code}`
+		return axiosClient.get(url)
+	},
+}
 
-export default loginApi;
+export default loginApi

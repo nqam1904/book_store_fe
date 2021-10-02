@@ -97,9 +97,9 @@ const HeaderClient = () => {
 					<div className="d-grid gap-2">
 						<ButtonLogin onClick={onSubmit} />
 						<div className="text-center option-social">
-							<hr class="flex-fill m-0"></hr>
+							<hr className="flex-fill m-0"></hr>
 							<span className="text-or">OR</span>
-							<hr class="flex-fill m-0"></hr>
+							<hr className="flex-fill m-0"></hr>
 						</div>
 
 						<ButtonDiscord />
