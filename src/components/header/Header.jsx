@@ -9,7 +9,7 @@ const Header = () => {
 	return (
 		<Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" sticky="top">
 			<Container>
-				<Navbar.Brand as={Link} to="/admin">
+				<Navbar.Brand as={Link} to="/">
 					Home
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -31,7 +31,7 @@ const Header = () => {
 				</Navbar.Collapse>
 				<Navbar.Collapse className="justify-content-end">
 					<Navbar.Text>
-						Signed in as: <span>{`${user.firstName}`}</span>
+						Signed in as: <span>{`${user.firstName} ${user.lastName}`}</span>
 					</Navbar.Text>
 				</Navbar.Collapse>
 			</Container>

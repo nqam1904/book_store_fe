@@ -16,7 +16,7 @@ function* loginSaga(action) {
 		const response = yield call(loginApi.login, action.payload)
 		localStorage.setItem(StorageKeys.TOKEN, response.access_token)
 		if (response.data?.role === 'admin') {
-			history.push('/admin')
+			history.push('/admin/account')
 		}
 		yield put(Action.loginSuccess(response.data))
 		toast.success('🚀 Success', option)
