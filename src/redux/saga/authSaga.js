@@ -26,6 +26,19 @@ function* loginSaga(action) {
 		Loading.hide()
 	}
 }
+function* loginDiscordSaga(action) {
+	try {
+		console.log(action.payload)
+		const response = yield call(loginApi.discord, action.payload)
+		localStorage.setItem(StorageKeys.TOKEN, response.access_token)
+		if (response.data?.role === 'admin') {
+			history.push('/admin/account')
+		}
+		yield put(Action.loginSuccess(response.data))
+	} catch (error) {
+		toast.error(`${error}`, option)
+	}
+}
 //********************************* */
 function* getListAccountSaga(action) {
 	try {
@@ -82,6 +95,7 @@ function* deleteActionSaga(action) {
 // eslint-disable-next-line
 export default function* () {
 	yield takeLatest(Action.SIGN_IN, loginSaga)
+	yield takeLatest(Action.LOGIN_DISCORD, loginDiscordSaga)
 	yield takeLatest(Action.GET_LIST_ACCOUNT, getListAccountSaga)
 	yield takeLatest(Action.CREATE_ACCOUNT, createActionSaga)
 	yield takeLatest(Action.EDIT_ACCOUNT, editActionSaga)

@@ -1,3 +1,5 @@
+import { createAction } from '@reduxjs/toolkit'
+
 export const SIGN_IN = 'SIGN_IN'
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS'
 export const SIGN_OUT = 'SIGN_OUT'
@@ -21,6 +23,9 @@ export const signOutAction = () => {
 		type: SIGN_OUT,
 	}
 }
+//********************************* */
+export const LOGIN_DISCORD = 'LOGIN_DISCORD'
+export const loginDiscordAction = createAction(LOGIN_DISCORD)
 //********************************* */
 export const GET_LIST_ACCOUNT = 'GET_LIST_ACCOUNT'
 export const getListAccountAction = () => {

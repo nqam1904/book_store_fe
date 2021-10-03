@@ -7,20 +7,20 @@ import './index.scss'
 import ItemBook from './itemBook'
 import { useLocation } from 'react-router-dom'
 import { useState } from 'react'
+import { loginDiscordAction } from 'redux/actions/loginAction'
 const Home = () => {
 	const dispatch = useDispatch()
 	const listBook = useSelector(listBookSelector)
-	const [code, setCode] = useState('')
-
 	let query = useQuery()
-
 	useEffect(() => {
-		setCode(query)
+		if (query.get('code') != null) {
+			dispatch(loginDiscordAction(query.get('code')))
+		}
+	}, [query])
+	useEffect(() => {
 		dispatch(getListBookAction())
 	}, [])
-	useEffect(() => {
-		console.log(code, 'code')
-	}, [code])
+
 	const onFavorite = () => {}
 	const onViewPdf = () => {}
 

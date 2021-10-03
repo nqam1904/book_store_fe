@@ -19,7 +19,6 @@ const Books = () => {
 	}, [])
 
 	const listBook = data.map((item) => {
-		console.log(item)
 		return (
 			<FlipMove
 				duration={300}
