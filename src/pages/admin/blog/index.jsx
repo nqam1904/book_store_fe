@@ -1,34 +1,32 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Diaglog, DropDown, DropFileInput, InputField } from 'components'
+import { Diaglog, DropDown, InputField } from 'components'
 import { IMG_URL } from 'config'
 import { format } from 'date-fns'
 import React, { useEffect, useRef, useState } from 'react'
 import { Button, Form, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { getListBlogAction } from 'redux/actions/blogAction'
-import { createBookAction } from 'redux/actions/bookAction'
 import { listBlogSelector } from 'redux/selectores/blogSelector'
 import { listCategorySelector } from 'redux/selectores/bookSelector'
 import { formatSubstring } from 'utils/function'
 import './index.scss'
+import { CKEditor } from '@ckeditor/ckeditor5-react'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 library.add(faEye)
 export const DialogCreateBookRef = React.createRef()
 const Blog = () => {
-	const [title, setTitle] = useState('')
-	const [author, setAuthor] = useState('')
-	const [category, setCategory] = useState('')
-	const [file, setFile] = useState([])
-	const [fileImage, setFileImage] = useState([])
-
-	const [isEdit, setIsEdit] = useState(false)
-	const titleRef = useRef()
-	const authorRef = useRef()
-	const cateRef = useRef()
 	const dispatch = useDispatch()
 	const listBlog = useSelector(listBlogSelector)
 	const listCategory = useSelector(listCategorySelector)
+	const [title, setTitle] = useState('')
+	const [category, setCategory] = useState('')
+
+	const [isEdit, setIsEdit] = useState(false)
+	const titleRef = useRef()
+	const cateRef = useRef()
+
 	useEffect(() => {
 		dispatch(getListBlogAction())
 	}, [])
@@ -39,36 +37,18 @@ const Blog = () => {
 		titleRef.current.hideError()
 	}
 
-	const onChangeAuthor = (e) => {
-		e.preventDefault()
-		setAuthor(e.target.value)
-		authorRef.current.hideError()
-	}
-
 	const openDialog = () => {
 		DialogCreateBookRef.current.open()
 		setTitle('')
-		setAuthor('')
 		setCategory('')
-		setFile('')
 		setIsEdit(false)
 	}
 
 	const onSubmit = (e) => {
 		e.preventDefault()
-		if (!!title && !!author && !!category) {
-			dispatch(
-				createBookAction({
-					title,
-					author,
-					categoriesId: [category.value],
-					file,
-					fileImage,
-				})
-			)
+		if (!!title && !!category) {
 		} else {
 			title === '' && titleRef.current.showError('Please enter title!')
-			author === '' && authorRef.current.showError('Please enter author!')
 			category === '' && cateRef.current.showError('Please enter author!')
 		}
 	}
@@ -80,12 +60,6 @@ const Blog = () => {
 		setIsEdit(true)
 	}
 	const onRemove = (id) => {}
-	const onChangeFileImage = (e) => {
-		setFileImage(e.target.files)
-	}
-	const onFileChange = (files) => {
-		setFile(files)
-	}
 
 	return (
 		<div className="container">
@@ -111,7 +85,7 @@ const Blog = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{listBlog.map((item, index) => (
+					{listBlog?.map((item, index) => (
 						<tr key={item.id + index}>
 							<td>
 								<img src={IMG_URL + item?.images[0]?.key} className="image_book" />
@@ -162,17 +136,6 @@ const Blog = () => {
 							/>
 						</div>
 						<div className="form-group col-6">
-							<InputField
-								ref={authorRef}
-								name="author"
-								placeholder="Author"
-								label="Author"
-								type="text"
-								onChange={onChangeAuthor}
-								value={author}
-							/>
-						</div>
-						<div className="form-group">
 							<DropDown
 								ref={cateRef}
 								title="Category"
@@ -185,15 +148,27 @@ const Blog = () => {
 								onChange={onChange}
 							/>
 						</div>
-						<br />
-						<Form.Group controlId="formFile" className="mt-10">
-							<Form.Label className="mt-10">Image thumbnail</Form.Label>
-							<Form.Control type="file" onChange={onChangeFileImage} />
-						</Form.Group>
-						<div className="drop-image">
-							<Form.Label className="mbt-10">PDF</Form.Label>
-							<DropFileInput onFileChange={onFileChange} />
+						<div className="form-group">
+							<CKEditor
+								editor={ClassicEditor}
+								data="<p>Hello from CKEditor 5!</p>"
+								onReady={(editor) => {
+									// You can store the "editor" and use when it is needed.
+									console.log('Editor is ready to use!', editor)
+								}}
+								onChange={(event, editor) => {
+									const data = editor.getData()
+									console.log({ event, editor, data })
+								}}
+								onBlur={(event, editor) => {
+									console.log('Blur.', editor)
+								}}
+								onFocus={(event, editor) => {
+									console.log('Focus.', editor)
+								}}
+							/>
 						</div>
+						<br />
 					</div>
 				</form>
 			</Diaglog>
