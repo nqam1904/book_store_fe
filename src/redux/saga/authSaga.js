@@ -28,7 +28,6 @@ function* loginSaga(action) {
 }
 function* loginDiscordSaga(action) {
 	try {
-		console.log(action.payload)
 		const response = yield call(loginApi.discord, action.payload)
 		localStorage.setItem(StorageKeys.TOKEN, response.access_token)
 		if (response.data?.role === 'admin') {

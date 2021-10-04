@@ -5,7 +5,7 @@ import './index.scss'
 const InputField = forwardRef((props, ref) => {
 	const [message, setMessage] = useState('')
 	const [error, setError] = useState(false)
-	const { label, disable, type, placeholder, value, style } = props
+	const { label, readOnly, type, placeholder, value, style } = props
 
 	useImperativeHandle(ref, () => ({
 		showError: (message) => showError(message),
@@ -30,7 +30,7 @@ const InputField = forwardRef((props, ref) => {
 				type={type}
 				placeholder={placeholder}
 				value={value}
-				disable={disable}
+				readOnly={readOnly}
 				onChange={props.onChange}
 				maxLength={props.maxLength}
 			/>
@@ -45,7 +45,7 @@ const InputField = forwardRef((props, ref) => {
 				type="password"
 				placeholder={placeholder}
 				value={value}
-				disable={disable}
+				readOnly={readOnly}
 				onChange={props.onChange}
 			/>
 		</>
@@ -64,6 +64,6 @@ InputField.propType = {
 	label: PropTypes.string,
 	type: PropTypes.string,
 	placeholder: PropTypes.string,
-	disable: PropTypes.bool,
+	readOnly: PropTypes.bool,
 	isPassword: PropTypes.bool,
 }

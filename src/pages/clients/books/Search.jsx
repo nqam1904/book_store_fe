@@ -16,7 +16,7 @@ const Search = ({ query }) => {
 	return (
 		<div className="search-books">
 			<Form className="search-books--form" onSubmit={handleOnSubmit}>
-				<Form.Group controlId="formBasicEmail">
+				<Form.Group>
 					<Form.Control
 						type="text"
 						onChange={onInputChange}
@@ -24,10 +24,12 @@ const Search = ({ query }) => {
 					/>
 					<Form.Text className="text-muted">Search programming books</Form.Text>
 				</Form.Group>
+			</Form>
+			<div className="d-grid gap-2">
 				<Button variant="primary" type="submit">
 					Search
 				</Button>
-			</Form>
+			</div>
 		</div>
 	)
 }

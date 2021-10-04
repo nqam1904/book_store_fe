@@ -1,20 +1,22 @@
-import { HeaderClient } from 'components'
+import { HeaderClient, Footer } from 'components'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import { getListBookAction } from 'redux/actions/bookAction'
+import { userSelector } from 'redux/selectores/authSelector'
+import { listBlogSelector } from 'redux/selectores/blogSelector'
 import { listBookSelector } from 'redux/selectores/bookSelector'
 import './index.scss'
 import ItemBook from './itemBook'
-import { useLocation } from 'react-router-dom'
-import { useState } from 'react'
-import { loginDiscordAction } from 'redux/actions/loginAction'
 const Home = () => {
 	const dispatch = useDispatch()
 	const listBook = useSelector(listBookSelector)
+	const listBlog = useSelector(listBlogSelector)
+	const userAuth = useSelector(userSelector)
 	let query = useQuery()
 	useEffect(() => {
 		if (query.get('code') != null) {
-			dispatch(loginDiscordAction(query.get('code')))
+			// dispatch(loginDiscordAction(query.get('code')))
 		}
 	}, [query])
 	useEffect(() => {
@@ -23,7 +25,23 @@ const Home = () => {
 
 	const onFavorite = () => {}
 	const onViewPdf = () => {}
-
+	const showItemBook = (listBook) => {
+		let result = null
+		const data = listBook.slice(0, 4)
+		result = data.map((item, index) => {
+			return (
+				<ItemBook
+					key={index}
+					images={item.images[0]?.key}
+					name={item.title}
+					author={item.author}
+					onFavorite={onFavorite}
+					onViewPdf={onViewPdf}
+				/>
+			)
+		})
+		return result
+	}
 	return (
 		<>
 			<HeaderClient />
@@ -31,20 +49,7 @@ const Home = () => {
 				<h4 className="title-book">
 					<span>Featured Books</span>
 				</h4>
-				<div className="list-book">
-					{listBook.map((item, index) => {
-						return (
-							<ItemBook
-								key={index}
-								images={item.images[0]?.key}
-								name={item.title}
-								author={item.author}
-								onFavorite={onFavorite}
-								onViewPdf={onViewPdf}
-							/>
-						)
-					})}
-				</div>
+				<div className="list-book">{showItemBook(listBook)}</div>
 			</section>
 
 			<section className="blog" id="blog">
@@ -52,7 +57,7 @@ const Home = () => {
 					<span>Featured Blog</span>
 				</h4>
 				<div className="list-book">
-					{listBook.map((item, index) => {
+					{listBlog?.map((item, index) => {
 						return (
 							<ItemBook
 								key={index}
@@ -69,72 +74,7 @@ const Home = () => {
 
 			{/* <!-- footer section starts  --> */}
 
-			<section className="footer">
-				<div className="box-container">
-					<div className="box">
-						<h3>quick links</h3>
-						<a href="#">
-							<i className="fas fa-arrow-right"></i> home
-						</a>
-						<a href="#">
-							<i className="fas fa-arrow-right"></i> featured
-						</a>
-						<a href="#">
-							<i className="fas fa-arrow-right"></i> arrivals
-						</a>
-						<a href="#">
-							<i className="fas fa-arrow-right"></i> reviews
-						</a>
-						<a href="#">
-							<i className="fas fa-arrow-right"></i> blogs
-						</a>
-					</div>
-
-					<div className="box">
-						<h3>extra links</h3>
-						<a href="#">
-							<i className="fas fa-arrow-right"></i> account info
-						</a>
-						<a href="#">
-							<i className="fas fa-arrow-right"></i> ordered items
-						</a>
-						<a href="#">
-							<i className="fas fa-arrow-right"></i> privacy policy
-						</a>
-						<a href="#">
-							<i className="fas fa-arrow-right"></i> payment method
-						</a>
-						<a href="#">
-							<i className="fas fa-arrow-right"></i> our serivces
-						</a>
-					</div>
-
-					<div className="box">
-						<h3>contact info</h3>
-						<a href="tel:0339190498">
-							<i className="fas fa-phone"></i> +84-339-1904-98
-						</a>
-						<a href="#">
-							<i className="fas fa-phone"></i> +111-222-3333
-						</a>
-						<a href="mailto: nghiemminh1904@gmail.com">
-							<i className="fas fa-envelope"></i> nghiemminh1904@gmail.com
-						</a>
-					</div>
-				</div>
-
-				<div className="share">
-					<a href="#" className="fab fa-facebook-f"></a>
-					<a
-						href="https://discord.gg/rt7myeRkjd"
-						target="_blank"
-						className="fab fa-discord"></a>
-				</div>
-
-				<div className="credit">
-					created by <span>mr. web designer</span> | all rights reserved!
-				</div>
-			</section>
+			<Footer />
 		</>
 	)
 }

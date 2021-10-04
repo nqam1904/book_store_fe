@@ -22,8 +22,10 @@
 .books-list {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
+	margin-bottom: 1rem;
 }
 .book-card {
 	margin-top: 20px;
-	margin-right: 100px;
+	margin-right: 1.5rem;
 }

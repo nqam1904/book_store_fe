@@ -112,8 +112,8 @@
 }
 
 .bottom-navbar-header a {
-	font-size: 2.5rem;
-	padding: 2rem;
+	font-size: 1.5rem;
+	padding: 1.5rem;
 	color: $white;
 }
 
@@ -136,5 +136,16 @@
 .text-or {
 	margin-left: 10px;
 	margin-right: 10px;
-	
+}
+.avatar-client {
+	width: 200px;
+	height: 200px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.name-account {
+	margin-top: 10px;
+	text-align: center;
+	font-weight: bold;
 }

@@ -2,14 +2,12 @@ import React, { useEffect } from 'react'
 import { HeaderClient, CardItem } from 'components'
 
 import { Breadcrumb } from 'react-bootstrap'
-import FlipMove from 'react-flip-move'
 import Search from './Search'
 import './index.scss'
 import { listBookSelector } from 'redux/selectores/bookSelector'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { getListBookAction } from 'redux/actions/bookAction'
-import { images } from 'assets/images'
 
 const Books = () => {
 	const dispatch = useDispatch()
@@ -18,22 +16,15 @@ const Books = () => {
 		dispatch(getListBookAction())
 	}, [])
 
-	const listBook = data.map((item) => {
+	const listBook = data.map((item, index) => {
 		return (
-			<FlipMove
-				duration={300}
-				staggerDelayBy={150}
-				appearAnimation="accordionVertical"
-				enterAnimation="fade"
-				leaveAnimation="fade"
-				key={item.id}>
-				<CardItem
-					title={item.title}
-					text={item.author}
-					// image={images.loader_img}
-					pdf={item.images[1].key}
-				/>
-			</FlipMove>
+			<CardItem
+				key={index}
+				title={item.title}
+				text={item.author}
+				image={item.images[0]?.key}
+				pdf={item.images[1]?.key}
+			/>
 		)
 	})
 	return (

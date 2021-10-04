@@ -10,5 +10,6 @@ import BlogAdmin from './admin/blog'
 import Client from './clients/home'
 import Books from './clients/books'
 import Blog from './clients/blog'
+import Users from './clients/user'
 
-export { User, Book, Admin, Category, Auth, Client, Books, Blog, BlogAdmin }
+export { User, Book, Admin, Category, Auth, Client, Books, Blog, BlogAdmin, Users }

@@ -201,7 +201,18 @@ const User = () => {
 								onChange={onChangeEmail}
 								value={email}
 							/>
-							{!isEdit && (
+							{!isEdit ? (
+								<InputField
+									ref={passwordRef}
+									name="password"
+									isPassword
+									placeholder="Password"
+									label="Password"
+									type="password"
+									onChange={onChangePassword}
+									value={password}
+								/>
+							) : (
 								<InputField
 									ref={passwordRef}
 									name="password"

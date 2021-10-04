@@ -1,11 +1,15 @@
 import { InputField, Canvas, ButtonDiscord, ButtonLogin } from 'components'
 import React, { useRef, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { loginAction } from 'redux/actions/loginAction'
+import { loginAction, signOutAction } from 'redux/actions/loginAction'
 import { validateEmail } from 'utils/function'
+import { userSelector } from 'redux/selectores/authSelector'
+import { Button } from 'react-bootstrap'
 import './index.scss'
+import { images } from 'assets/images'
+import StorageKeys from 'constants/Storage-key'
 const HeaderClient = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
@@ -13,6 +17,8 @@ const HeaderClient = () => {
 	const emailRef = useRef()
 	const canvasRef = useRef()
 	const dispatch = useDispatch()
+	const userAuth = useSelector(userSelector)
+	const isloggedin = localStorage.getItem(StorageKeys.TOKEN)
 	const onChangeEmail = (e) => {
 		e.preventDefault()
 		setEmail(e.target.value)
@@ -39,7 +45,12 @@ const HeaderClient = () => {
 	const onFormLogin = () => {
 		canvasRef.current.open()
 	}
-
+	const onLogout = () => {
+		dispatch(signOutAction())
+		setEmail('')
+		setPassword('')
+		localStorage.clear()
+	}
 	return (
 		<>
 			<header className="header">
@@ -72,48 +83,67 @@ const HeaderClient = () => {
 				<Link to="#reviews" className="fas fa-comments"></Link>
 				<Link to="#about" className="fas fa-blog"></Link>
 			</nav>
-			<Canvas ref={canvasRef} title="Login" placement="end" scroll={true} backdrop={true}>
-				<form>
-					<InputField
-						ref={emailRef}
-						name="email"
-						placeholder="Email"
-						label="Email"
-						type="email"
-						onChange={onChangeEmail}
-						value={email}
-					/>
-					<InputField
-						ref={passwordRef}
-						name="password"
-						isPassword
-						placeholder="Password"
-						label="Password"
-						type="password"
-						onChange={onChangePassword}
-						value={password}
-					/>
+			<Canvas
+				ref={canvasRef}
+				title={`${isloggedin ? `Hi, ${userAuth.lastName}` : 'Login'}`}
+				placement="end"
+				scroll={true}
+				backdrop={true}>
+				{isloggedin ? (
+					<>
+						<img src={images.logo_discord} className="avatar-client" />
+						<Link to="/users">
+							<h4 className="name-account">{userAuth.email}</h4>
+						</Link>
+						<div className="d-grid gap-2">
+							<Button variant="primary" onClick={onLogout}>
+								LOGOUT
+							</Button>
+						</div>
+					</>
+				) : (
+					<form>
+						<InputField
+							ref={emailRef}
+							name="email"
+							placeholder="Email"
+							label="Email"
+							type="email"
+							onChange={onChangeEmail}
+							value={email}
+						/>
+						<InputField
+							ref={passwordRef}
+							name="password"
+							isPassword
+							placeholder="Password"
+							label="Password"
+							type="password"
+							onChange={onChangePassword}
+							value={password}
+						/>
 
-					<div className="d-grid gap-2">
-						<ButtonLogin onClick={onSubmit} />
-						<div className="text-center option-social">
-							<hr className="flex-fill m-0"></hr>
-							<span className="text-or">OR</span>
-							<hr className="flex-fill m-0"></hr>
+						<div className="d-grid gap-2">
+							<ButtonLogin onClick={onSubmit} />
+							<div className="text-center option-social">
+								<hr className="flex-fill m-0"></hr>
+								<span className="text-or">OR</span>
+								<hr className="flex-fill m-0"></hr>
+							</div>
+
+							<ButtonDiscord />
 						</div>
 
-						<ButtonDiscord />
-					</div>
-
-					<div className="sign-up">
-						<p>
-							Forget password? <Link to="#">Click here</Link>
-						</p>
-						<p>
-							Don't have an account? <Link to="#">Create one</Link>
-						</p>
-					</div>
-				</form>
+						<div className="sign-up">
+							<p>
+								Forget password? <Link to="#">Click here</Link>
+							</p>
+							<p>
+								Don't have an account? <Link to="#">Create one</Link>
+							</p>
+						</div>
+					</form>
+				)}
 			</Canvas>
 		</>
 	)
