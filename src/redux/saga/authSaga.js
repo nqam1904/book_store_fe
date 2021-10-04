@@ -8,6 +8,7 @@ import StorageKeys from 'constants/Storage-key'
 import { history } from 'redux/store'
 import userApi from '../../api/userApi'
 import { DialogRef } from 'pages/admin/user'
+import { signUpRef } from 'components/headerClient/HeaderClient'
 const option = optionToast
 
 function* loginSaga(action) {
@@ -54,7 +55,8 @@ function* createActionSaga(action) {
 		// eslint-disable-next-line
 		const response = yield call(userApi.add, action.payload)
 		yield put(Action.getListAccountAction())
-		yield DialogRef.current.close()
+		DialogRef?.current?.close()
+		signUpRef?.current?.close()
 		toast.success(`Tạo tài khoản thành công`, option)
 	} catch (error) {
 		toast.error(`${error}`, option)

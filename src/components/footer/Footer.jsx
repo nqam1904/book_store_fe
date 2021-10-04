@@ -10,10 +10,14 @@ const Footer = () => {
 							<h6 className="footer-heading text-uppercase">Information</h6>
 							<ul className="list-unstyled footer-link mt-4">
 								<li>
-									<a href="https://www.facebook.com/quocminh1904/">Nghiem Quoc Anh Minh</a>
+									<a href="https://www.facebook.com/quocminh1904/" target="blank">
+										Nghiem Quoc Anh Minh
+									</a>
 								</li>
 								<li>
-									<a href="https://www.facebook.com/TaiTran2512">Tran Tan Tai</a>
+									<a href="https://www.facebook.com/TaiTran2512" target="blank">
+										Tran Tan Tai
+									</a>
 								</li>
 							</ul>
 						</div>

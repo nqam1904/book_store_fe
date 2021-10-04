@@ -84,28 +84,17 @@ const Profile = (props) => {
 						readOnly={isEdit}
 					/>
 					<InputField
-						ref={passwordRef}
-						name="password"
-						isPassword
-						placeholder="Password"
-						label="Password"
-						type="password"
-						onChange={onChangePassword}
-						value={password}
+						ref={phoneRef}
+						name="phone"
+						placeholder="Phone"
+						label="Phone"
+						maxLength={10}
+						type="number"
+						onChange={onChangePhone}
+						value={phone}
 						readOnly={isEdit}
 					/>
 				</div>
-				<InputField
-					ref={phoneRef}
-					name="phone"
-					placeholder="Phone"
-					label="Phone"
-					maxLength={10}
-					type="number"
-					onChange={onChangePhone}
-					value={phone}
-					readOnly={isEdit}
-				/>
 			</div>
 		</div>
 	)

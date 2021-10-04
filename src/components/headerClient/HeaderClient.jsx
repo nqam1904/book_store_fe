@@ -10,12 +10,15 @@ import { Button } from 'react-bootstrap'
 import './index.scss'
 import { images } from 'assets/images'
 import StorageKeys from 'constants/Storage-key'
+import SignUpForm from './SignUpForm'
+export const signUpRef = React.createRef()
 const HeaderClient = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const passwordRef = useRef()
 	const emailRef = useRef()
-	const canvasRef = useRef()
+	const signInRef = useRef()
+
 	const dispatch = useDispatch()
 	const userAuth = useSelector(userSelector)
 	const isloggedin = localStorage.getItem(StorageKeys.TOKEN)
@@ -43,7 +46,10 @@ const HeaderClient = () => {
 		}
 	}
 	const onFormLogin = () => {
-		canvasRef.current.open()
+		signInRef.current.open()
+	}
+	const onFormSignUp = () => {
+		signUpRef.current.open()
 	}
 	const onLogout = () => {
 		dispatch(signOutAction())
@@ -84,7 +90,7 @@ const HeaderClient = () => {
 				<Link to="#about" className="fas fa-blog"></Link>
 			</nav>
 			<Canvas
-				ref={canvasRef}
+				ref={signInRef}
 				title={`${isloggedin ? `Hi, ${userAuth.lastName}` : 'Login'}`}
 				placement="end"
 				scroll={true}
@@ -139,11 +145,17 @@ const HeaderClient = () => {
 								Forget password? <Link to="#">Click here</Link>
 							</p>
 							<p>
-								Don't have an account? <Link to="#">Create one</Link>
+								Don't have an account?{' '}
+								<span onClick={onFormSignUp} className="text">
+									Create one
+								</span>
 							</p>
 						</div>
 					</form>
 				)}
+			</Canvas>
+			<Canvas ref={signUpRef} title="Sign Up" placement="end" scroll={true} backdrop={true}>
+				<SignUpForm />
 			</Canvas>
 		</>
 	)

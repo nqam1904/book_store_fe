@@ -2,12 +2,16 @@ import React, { useEffect } from 'react'
 import { HeaderClient, CardItem } from 'components'
 
 import { Breadcrumb } from 'react-bootstrap'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import debounce from 'lodash/debounce'
 import Search from './Search'
 import './index.scss'
 import { listBookSelector } from 'redux/selectores/bookSelector'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { getListBookAction } from 'redux/actions/bookAction'
+import { useState } from 'react'
 
 const Books = () => {
 	const dispatch = useDispatch()
@@ -15,17 +19,37 @@ const Books = () => {
 	useEffect(() => {
 		dispatch(getListBookAction())
 	}, [])
+	const [value, setValue] = useState('')
+	const handleOnSubmit = (e) => {
+		e.preventDefault()
+	}
 
+	const onInputChange = (e) => {
+		setValue(e.target.value)
+	}
 	const listBook = data.map((item, index) => {
-		return (
-			<CardItem
-				key={index}
-				title={item.title}
-				text={item.author}
-				image={item.images[0]?.key}
-				pdf={item.images[1]?.key}
-			/>
-		)
+		if (!value) {
+			return (
+				<CardItem
+					key={index}
+					title={item.title}
+					text={item.author}
+					image={item.images[0]?.key}
+					pdf={item.images[1]?.key}
+				/>
+			)
+		} else if (item.title.toLowerCase().match(value.toLowerCase())) {
+			return (
+				<CardItem
+					key={index}
+					title={item.title}
+					text={item.author}
+					image={item.images[0]?.key}
+					pdf={item.images[1]?.key}
+				/>
+			)
+		}
+		return <></>
 	})
 	return (
 		<>
@@ -38,7 +62,24 @@ const Books = () => {
 					<Breadcrumb.Item>Books</Breadcrumb.Item>
 				</Breadcrumb>
 
-				<Search />
+				<div className="search-books">
+					<Form className="search-books--form" onSubmit={handleOnSubmit}>
+						<Form.Group>
+							<Form.Control
+								type="text"
+								onChange={onInputChange}
+								placeholder="Clean Code, React Native ..."
+								value={value}
+							/>
+							<Form.Text className="text-muted">Search programming books</Form.Text>
+						</Form.Group>
+					</Form>
+					<div className="d-grid gap-2">
+						<Button variant="primary" type="submit">
+							Search
+						</Button>
+					</div>
+				</div>
 
 				{/*List Book */}
 				<br />

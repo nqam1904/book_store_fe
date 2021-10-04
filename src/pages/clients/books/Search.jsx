@@ -3,7 +3,9 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import debounce from 'lodash/debounce'
 import './index.scss'
+import { useState } from 'react'
 const Search = ({ query }) => {
+	const [value, setValue] = useState('')
 	const handleOnSubmit = (e) => {
 		e.preventDefault()
 	}
@@ -21,6 +23,7 @@ const Search = ({ query }) => {
 						type="text"
 						onChange={onInputChange}
 						placeholder="Clean Code, React Native ..."
+						value={value}
 					/>
 					<Form.Text className="text-muted">Search programming books</Form.Text>
 				</Form.Group>
