@@ -54,7 +54,7 @@ function* deleteBookSaga(action) {
 	}
 }
 //********************************* */
-function* getListCategorySaga(action) {
+function* getListCategorySaga() {
 	try {
 		const response = yield call(categoryAPi.getAll)
 		yield put(Action.getListCategorySuccess(response))

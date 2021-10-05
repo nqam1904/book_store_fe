@@ -119,7 +119,7 @@ const Book = () => {
 				</thead>
 				<tbody>
 					{listBook.map((item, index) => (
-						<tr key={item.id + index}>
+						<tr key={index}>
 							<td>
 								<img src={IMG_URL + item?.images[0]?.key} className="image_book" />
 							</td>

@@ -95,6 +95,7 @@ const User = () => {
 					phone,
 					password,
 					email,
+					role: 'admin',
 				})
 			)
 		} else {
@@ -138,7 +139,7 @@ const User = () => {
 				</thead>
 				<tbody>
 					{listAccount.map((item, index) => (
-						<tr key={item.id + index}>
+						<tr key={index}>
 							<td>{item.firstName}</td>
 							<td>{item.lastName}</td>
 							<td>{item.email}</td>

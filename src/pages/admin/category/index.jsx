@@ -20,6 +20,7 @@ const Category = () => {
 	const nameRef = useRef()
 	const dispatch = useDispatch()
 	const listCategory = useSelector(listCategorySelector)
+	console.log(listCategory, 'list')
 	useEffect(() => {
 		dispatch(getListCategoryAction())
 	}, [])
@@ -77,7 +78,7 @@ const Category = () => {
 				</thead>
 				<tbody>
 					{listCategory.map((item, index) => (
-						<tr key={item.id + index}>
+						<tr key={index}>
 							<td>{item?.name}</td>
 							<td>{format(new Date(item?.createDate), 'dd-LL-yyyy')}</td>
 							<td className="text-center">

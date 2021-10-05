@@ -7,7 +7,7 @@ import { format } from 'date-fns'
 import React, { useEffect, useRef, useState } from 'react'
 import { Button, Form, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { getListBlogAction } from 'redux/actions/blogAction'
+import { createBlogAction, getListBlogAction } from 'redux/actions/blogAction'
 import { listBlogSelector } from 'redux/selectores/blogSelector'
 import { listCategorySelector } from 'redux/selectores/bookSelector'
 import { formatSubstring } from 'utils/function'
@@ -22,7 +22,8 @@ const Blog = () => {
 	const listCategory = useSelector(listCategorySelector)
 	const [title, setTitle] = useState('')
 	const [category, setCategory] = useState('')
-
+	const [fileImage, setFileImage] = useState([])
+	const [addData, setAddData] = useState('')
 	const [isEdit, setIsEdit] = useState(false)
 	const titleRef = useRef()
 	const cateRef = useRef()
@@ -47,6 +48,14 @@ const Blog = () => {
 	const onSubmit = (e) => {
 		e.preventDefault()
 		if (!!title && !!category) {
+			dispatch(
+				createBlogAction({
+					title,
+					categoriesId: [category.value],
+					fileImage,
+					addData,
+				})
+			)
 		} else {
 			title === '' && titleRef.current.showError('Please enter title!')
 			category === '' && cateRef.current.showError('Please enter author!')
@@ -61,6 +70,13 @@ const Blog = () => {
 	}
 	const onRemove = (id) => {}
 
+	const onChangeFileImage = (e) => {
+		setFileImage(e.target.files)
+	}
+	const handleChange = (e, editor) => {
+		const data = editor.getData()
+		setAddData(data)
+	}
 	return (
 		<div className="container">
 			<div className="nav_user">
@@ -86,7 +102,7 @@ const Blog = () => {
 				</thead>
 				<tbody>
 					{listBlog?.map((item, index) => (
-						<tr key={item.id + index}>
+						<tr key={index}>
 							<td>
 								<img src={IMG_URL + item?.images[0]?.key} className="image_book" />
 							</td>
@@ -148,27 +164,16 @@ const Blog = () => {
 								onChange={onChange}
 							/>
 						</div>
-						<div className="form-group">
-							<CKEditor
-								editor={ClassicEditor}
-								data="<p>Hello from CKEditor 5!</p>"
-								onReady={(editor) => {
-									// You can store the "editor" and use when it is needed.
-									console.log('Editor is ready to use!', editor)
-								}}
-								onChange={(event, editor) => {
-									const data = editor.getData()
-									console.log({ event, editor, data })
-								}}
-								onBlur={(event, editor) => {
-									console.log('Blur.', editor)
-								}}
-								onFocus={(event, editor) => {
-									console.log('Focus.', editor)
-								}}
-							/>
-						</div>
+						<Form.Group controlId="formFile mb-10">
+							<Form.Label>Image thumbnail</Form.Label>
+							<Form.Control type="file" onChange={onChangeFileImage} />
+						</Form.Group>
 						<br />
+						<div className="form-group mt-10">
+							<br />
+
+							<CKEditor editor={ClassicEditor} data={addData} onChange={handleChange} />
+						</div>
 					</div>
 				</form>
 			</Diaglog>

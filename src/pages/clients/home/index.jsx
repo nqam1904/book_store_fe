@@ -1,5 +1,6 @@
 import { HeaderClient, Footer } from 'components'
 import React, { useEffect } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { getListBookAction } from 'redux/actions/bookAction'
@@ -14,12 +15,14 @@ const Home = () => {
 	const listBook = useSelector(listBookSelector)
 	const listBlog = useSelector(listBlogSelector)
 	const userAuth = useSelector(userSelector)
+	const [code, setCode] = useState('')
 	let query = useQuery()
 	useEffect(() => {
 		if (query.get('code') != null) {
-			dispatch(loginDiscordAction(query.get('code')))
+			setCode(query.get('code'))
+			dispatch(loginDiscordAction(code))
 		}
-	}, [query])
+	}, [code])
 	useEffect(() => {
 		dispatch(getListBookAction())
 	}, [])

@@ -20,6 +20,7 @@ const blogApi = {
 	 */
 	add(data) {
 		const url = `/blog`
+		console.log(data)
 		return axiosClient.post(url, data)
 	},
 	/**

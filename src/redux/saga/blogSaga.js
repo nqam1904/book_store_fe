@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 import optionToast from 'utils/Toast'
 import { history } from 'redux/store'
 import { userSelector } from 'redux/selectores/authSelector'
+import mediaApi from 'api/mediaApi'
 const option = optionToast
 
 function* listBlogSaga(action) {
@@ -18,13 +19,17 @@ function* listBlogSaga(action) {
 }
 //********************************* */
 function* createBlogSaga(action) {
+	console.log(action.payload)
 	try {
 		Loading.show()
+		const file = yield call(mediaApi.upload, action.payload?.fileImage)
 		const user = yield select(userSelector)
 		const response = yield call(blogApi.add, {
 			...action.payload,
 			author: `${user.firstName} ${user.lastName}`,
+			imagesId: [...file[0]?.mediasId],
 		})
+		yield put(Action.getListBlogAction())
 	} catch (error) {
 		toast.error(`${error}`, option)
 	} finally {
