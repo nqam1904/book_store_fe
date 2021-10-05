@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { getListBookAction } from 'redux/actions/bookAction'
+import { loginDiscordAction } from 'redux/actions/loginAction'
 import { userSelector } from 'redux/selectores/authSelector'
 import { listBlogSelector } from 'redux/selectores/blogSelector'
 import { listBookSelector } from 'redux/selectores/bookSelector'
@@ -16,7 +17,7 @@ const Home = () => {
 	let query = useQuery()
 	useEffect(() => {
 		if (query.get('code') != null) {
-			// dispatch(loginDiscordAction(query.get('code')))
+			dispatch(loginDiscordAction(query.get('code')))
 		}
 	}, [query])
 	useEffect(() => {

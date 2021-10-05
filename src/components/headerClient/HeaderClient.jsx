@@ -142,10 +142,11 @@ const HeaderClient = () => {
 
 						<div className="sign-up">
 							<p>
-								Forget password? <Link to="#">Click here</Link>
+								Forget password?
+								<span className="text"> Click here</span>
 							</p>
 							<p>
-								Don't have an account?{' '}
+								Don't have an account?
 								<span onClick={onFormSignUp} className="text">
 									Create one
 								</span>

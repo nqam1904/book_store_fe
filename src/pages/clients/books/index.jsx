@@ -31,7 +31,6 @@ const Books = () => {
 		if (!value) {
 			return (
 				<CardItem
-					key={index}
 					title={item.title}
 					text={item.author}
 					image={item.images[0]?.key}
@@ -41,7 +40,6 @@ const Books = () => {
 		} else if (item.title.toLowerCase().match(value.toLowerCase())) {
 			return (
 				<CardItem
-					key={index}
 					title={item.title}
 					text={item.author}
 					image={item.images[0]?.key}
@@ -74,11 +72,6 @@ const Books = () => {
 							<Form.Text className="text-muted">Search programming books</Form.Text>
 						</Form.Group>
 					</Form>
-					<div className="d-grid gap-2">
-						<Button variant="primary" type="submit">
-							Search
-						</Button>
-					</div>
 				</div>
 
 				{/*List Book */}

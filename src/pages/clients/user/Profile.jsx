@@ -1,5 +1,6 @@
 import { InputField } from 'components'
 import React, { useRef, useState, Button } from 'react'
+import { Col, Row } from 'react-bootstrap'
 import './index.scss'
 const Profile = (props) => {
 	const [fullName, setFullName] = useState(props.user?.firstName)
@@ -49,8 +50,8 @@ const Profile = (props) => {
 	}
 	return (
 		<div className="profile-item">
-			<div className="row">
-				<div className="form-group col-6">
+			<Row xs="auto">
+				<Col md="6">
 					<InputField
 						ref={fullNameRef}
 						name="firstName"
@@ -71,8 +72,8 @@ const Profile = (props) => {
 						value={lastName}
 						readOnly={isEdit}
 					/>
-				</div>
-				<div className="form-group col-6">
+				</Col>
+				<Col md="6">
 					<InputField
 						ref={emailRef}
 						name="email"
@@ -94,8 +95,8 @@ const Profile = (props) => {
 						value={phone}
 						readOnly={isEdit}
 					/>
-				</div>
-			</div>
+				</Col>
+			</Row>
 		</div>
 	)
 }

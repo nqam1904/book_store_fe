@@ -20,7 +20,7 @@ function* loginSaga(action) {
 			history.push('/admin/account')
 		}
 		yield put(Action.loginSuccess(response.data))
-		toast.success('🚀 Success', option)
+		toast.success('🚀 Login success', option)
 	} catch (error) {
 		toast.error(`${error}`, option)
 	} finally {
@@ -57,7 +57,7 @@ function* createActionSaga(action) {
 		yield put(Action.getListAccountAction())
 		DialogRef?.current?.close()
 		signUpRef?.current?.close()
-		toast.success(`Tạo tài khoản thành công`, option)
+		toast.success(`create new account success`, option)
 	} catch (error) {
 		toast.error(`${error}`, option)
 	} finally {

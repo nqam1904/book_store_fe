@@ -24,12 +24,12 @@ function* createBookSaga(action) {
 	try {
 		Loading.show()
 		const file = yield all([
-			call(mediaApi.upload, action.payload.fileImage),
-			call(mediaApi.upload, action.payload.file),
+			call(mediaApi.upload, action.payload?.fileImage),
+			call(mediaApi.upload, action.payload?.file),
 		])
 		const response = yield call(booksApi.add, {
 			...action.payload,
-			imagesId: [...file[0].mediasId, ...file[1].mediasId],
+			imagesId: [...file[0]?.mediasId, ...file[1]?.mediasId],
 		})
 		yield put(Action.getListBookAction())
 		DialogCreateBookRef.current.close()
