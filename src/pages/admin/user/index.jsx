@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './index.scss'
 import { Button, Table } from 'react-bootstrap'
-import { Diaglog, InputField } from 'components'
+import { Modal, InputField } from 'components'
 import { listAccountSelector } from 'redux/selectores/authSelector'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -163,7 +163,7 @@ const User = () => {
 				</tbody>
 			</Table>
 
-			<Diaglog
+			<Modal
 				ref={DialogRef}
 				title={isEdit ? 'Edit Account' : 'Create Account'}
 				onSubmit={isEdit ? onEdit : onSubmit}
@@ -238,7 +238,7 @@ const User = () => {
 						/>
 					</div>
 				</form>
-			</Diaglog>
+			</Modal>
 		</div>
 	)
 }

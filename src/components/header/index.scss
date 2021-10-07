@@ -1,6 +1,51 @@
-@import "../../assets/colors.scss";
+@import '../../assets/colors.scss';
 
 .link {
-  color: $white;
-  text-decoration: none;
+	color: $white;
+	text-decoration: none;
+}
+.ant-layout-header {
+	padding: 0px;
+}
+
+.header {
+	float: left;
+	list-style: none;
+	margin-left: -60px;
+}
+
+.avatar {
+	float: right;
+	list-style: none;
+	display: flex;
+	padding-right: 30px;
+}
+
+.imageNavbar {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+}
+
+.title {
+	color: $white;
+	font-size: 18px;
+	font-weight: bold;
+	padding-left: 24px;
+	& a {
+		// color: $white;
+	}
+}
+.selected {
+	color: $green;
+}
+
+.icon-menu {
+	font-size: 20px;
+	& :hover {
+		color: $green !important;
+	}
+}
+.header-name {
+	color: $black;
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './index.scss'
 import { Button, Table } from 'react-bootstrap'
-import { Diaglog, InputField } from 'components'
+import { Modal, InputField } from 'components'
 import { useDispatch, useSelector } from 'react-redux'
 import { listCategorySelector } from 'redux/selectores/bookSelector'
 import {
@@ -97,7 +97,7 @@ const Category = () => {
 				</tbody>
 			</Table>
 
-			<Diaglog
+			<Modal
 				ref={DialogCategoryRef}
 				title={isEdit ? 'Edit Category' : 'Create Category'}
 				onSubmit={isEdit ? onEdit : onSubmit}
@@ -115,7 +115,7 @@ const Category = () => {
 						/>
 					</div>
 				</form>
-			</Diaglog>
+			</Modal>
 		</div>
 	)
 }

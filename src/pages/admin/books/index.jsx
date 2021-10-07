@@ -1,7 +1,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Diaglog, DropDown, DropFileInput, InputField } from 'components'
+import { Modal, DropDown, DropFileInput, InputField } from 'components'
 import { IMG_URL } from 'config'
 import { format } from 'date-fns'
 import React, { useEffect, useRef, useState } from 'react'
@@ -150,7 +150,7 @@ const Book = () => {
 				</tbody>
 			</Table>
 
-			<Diaglog
+			<Modal
 				ref={DialogCreateBookRef}
 				title={isEdit ? 'Update Book' : 'Create Book'}
 				onSubmit={onSubmit}
@@ -203,7 +203,7 @@ const Book = () => {
 						</div>
 					</div>
 				</form>
-			</Diaglog>
+			</Modal>
 		</div>
 	)
 }

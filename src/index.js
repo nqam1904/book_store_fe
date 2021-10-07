@@ -8,7 +8,8 @@ import configureStore, { history } from 'redux/store'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Loading } from 'components'
-import { BrowserRouter } from 'react-router-dom'
+import 'antd/dist/antd.css'
+
 import { PersistGate } from 'redux-persist/integration/react'
 
 let { store, persistor } = configureStore()

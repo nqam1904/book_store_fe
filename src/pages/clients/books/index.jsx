@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { getListBookAction } from 'redux/actions/bookAction'
 import { useState } from 'react'
+import { LayoutClient } from 'layouts'
 
 const Books = () => {
 	const dispatch = useDispatch()
@@ -50,8 +51,7 @@ const Books = () => {
 		return <></>
 	})
 	return (
-		<>
-			<HeaderClient />
+		<LayoutClient>
 			<div className="container">
 				<br />
 				{/* Breadcrumb */}
@@ -78,7 +78,7 @@ const Books = () => {
 				<br />
 				<div className="books-list">{listBook}</div>
 			</div>
-		</>
+		</LayoutClient>
 	)
 }
 

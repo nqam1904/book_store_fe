@@ -1,6 +1,6 @@
 import Header from './header/Header'
 import HeaderClient from './headerClient/HeaderClient'
-import Diaglog from './modal/Dialog'
+import Modal from './modal/Modal'
 import InputField from './inputField/InputField'
 import NotFound from './notFound/NotFound'
 import Loading from './loading/Loading'
@@ -12,9 +12,12 @@ import DropDown from './dropdown/DropDown'
 import Canvas from './offCanvas/Canvas'
 import ButtonDiscord from './button/ButtonDiscord'
 import ButtonLogin from './button/ButtonLogin'
+import DropDownAnt from './dropdown/DropDownAnt'
+import FooterAnt from './footer/FooterAnt'
+import SiderAnt from './sider/SiderAnt'
 export {
 	Header,
-	Diaglog,
+	Modal,
 	InputField,
 	NotFound,
 	Loading,
@@ -27,4 +30,7 @@ export {
 	Canvas,
 	ButtonDiscord,
 	ButtonLogin,
+	DropDownAnt,
+	FooterAnt,
+	SiderAnt,
 }

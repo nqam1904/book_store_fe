@@ -18,6 +18,9 @@
 .mbt-10 {
 	margin-bottom: 10px;
 }
+.background-page {
+	color: #fafafa;
+}
 html {
 	overflow-x: hidden;
 	scroll-padding-top: 5rem;
@@ -46,9 +49,6 @@ html::-webkit-scrollbar-track {
 
 html::-webkit-scrollbar-thumb {
 	background: $black;
-}
-section {
-	padding: 5rem 9%;
 }
 
 /* media queries  */
@@ -87,4 +87,48 @@ section {
 }
 
 @media (max-width: 450px) {
+}
+
+// hot css ant desgin
+.layout-content {
+	flex-direction: row;
+	display: flex;
+}
+.trigger {
+	padding: 0 24px;
+	font-size: 18px;
+	line-height: 64px;
+	cursor: pointer;
+	transition: color 0.3s;
+}
+
+.trigger:hover {
+	color: #1890ff;
+}
+
+.logo-sider {
+	height: 30px;
+	margin: 16px;
+	font-size: 1.5rem;
+	font-weight: bolder;
+	color: $green;
+}
+
+.site-layout .site-layout-background {
+	background: #fff;
+}
+.sider-layout {
+}
+.ant-layout-sider {
+	position: relative;
+	min-width: 0;
+	background-color: $white !important;
+	transition: all 0.2s;
+}
+.ant-layout {
+	display: flex;
+	flex: auto;
+	flex-direction: column;
+	height: 100vh !important;
+	background-color: #f6f6f9 !important;
 }

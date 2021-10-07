@@ -1,4 +1,5 @@
 import { Header } from 'components'
+import { Dashboard } from 'layouts'
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import routes from 'routes'
@@ -23,8 +24,7 @@ const Home = () => {
 	}
 	return (
 		<React.Fragment>
-			<Header />
-			{renderRouter(routes)}
+			<Dashboard>{renderRouter(routes)}</Dashboard>
 		</React.Fragment>
 	)
 }
